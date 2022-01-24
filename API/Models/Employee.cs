@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace API.Models
@@ -26,6 +27,18 @@ namespace API.Models
         public DateTime BirthDate { get; set; }
         public Gender Gender { get; set; }
         public virtual Account Accounts{ get; set; }
+
+        [JsonIgnore]
+        public ICollection<TestingTask> TestingTask { get; set; }
+
+        [JsonIgnore]
+        public ICollection<DevelopTask> DevelopTask { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Progress> Progress { get; set; }
+
+        [JsonIgnore]
+        public ICollection<AssignEmployee> AssignEmployee { get; set; }
 
     }
 

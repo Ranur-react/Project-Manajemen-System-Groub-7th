@@ -15,5 +15,11 @@ namespace API.Context
         public DbSet<Account> Accounts{ get; set; }
         public DbSet<Employee> Employees{ get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<AssignEmployee> AssignEmployees { get; set; }
+        public DbSet<DevelopTask> DevelopTasks { get; set; }
+        public DbSet<Progress> Progresses { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectHistory> ProjectHistorys { get; set; }
+        public DbSet<TestingTask> TestTasks{ get; set; }
     }
 }
