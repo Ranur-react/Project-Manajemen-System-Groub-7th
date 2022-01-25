@@ -1,4 +1,5 @@
 using API.Context;
+using API.Repository.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,15 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<EmployeeRepository>();
+            services.AddScoped<AccountRepository>();
+            services.AddScoped<AssignEmployeeRepository>();
+            services.AddScoped<ProgressRepository>();
+            services.AddScoped<DevelopTaskRepository>();
+            services.AddScoped<ProjectRepository>();
+            services.AddScoped<ProjectHistoryRepository>();
+            services.AddScoped<RoleRepository>();
+            services.AddScoped<TestingTaskRepository>();
             services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("API")));
         }
 

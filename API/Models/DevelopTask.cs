@@ -29,7 +29,7 @@ namespace API.Models
 
         public virtual Employee Employee { get; set; }
 
-        public ICollection<TestingTask> TestingTask { get; set; }
+        public virtual ICollection<TestingTask> TestingTask { get; set; }
 
         
     }

@@ -29,16 +29,16 @@ namespace API.Models
         public virtual Account Accounts{ get; set; }
 
         [JsonIgnore]
-        public ICollection<TestingTask> TestingTask { get; set; }
+        public virtual ICollection<TestingTask> TestingTask { get; set; }
 
         [JsonIgnore]
-        public ICollection<DevelopTask> DevelopTask { get; set; }
+        public virtual ICollection<DevelopTask> DevelopTask { get; set; }
 
         [JsonIgnore]
-        public ICollection<Progress> Progress { get; set; }
+        public virtual ICollection<Progress> Progress { get; set; }
 
         [JsonIgnore]
-        public ICollection<AssignEmployee> AssignEmployee { get; set; }
+        public virtual ICollection<AssignEmployee> AssignEmployee { get; set; }
 
     }
 

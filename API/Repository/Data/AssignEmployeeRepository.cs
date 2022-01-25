@@ -11,6 +11,7 @@ namespace API.Repository.Data
     {
         public AssignEmployeeRepository(MyContext myContext) : base(myContext)
         {
+            
         }
     }
 }

@@ -48,7 +48,6 @@ D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\bin\Debug\netcor
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\obj\Debug\netcoreapp3.1\API.csproj.AssemblyReference.cache
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\obj\Debug\netcoreapp3.1\API.GeneratedMSBuildEditorConfig.editorconfig
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\obj\Debug\netcoreapp3.1\API.AssemblyInfoInputs.cache
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\obj\Debug\netcoreapp3.1\API.AssemblyInfo.cs
@@ -62,3 +61,5 @@ D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\obj\Debug\netcor
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\obj\Debug\netcoreapp3.1\API.dll
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\obj\Debug\netcoreapp3.1\API.pdb
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\obj\Debug\netcoreapp3.1\API.genruntimeconfig.cache
+D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\bin\Debug\netcoreapp3.1\Castle.Core.dll
+D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll

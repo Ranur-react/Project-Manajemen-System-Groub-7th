@@ -24,9 +24,9 @@ namespace API.Models
         public ProgressStatus ProgressStatus { get; set; }
 
         [JsonIgnore]
-        public ICollection<ProjectHistory> ProjectHistory { get; set; }
+        public virtual ICollection<ProjectHistory> ProjectHistory { get; set; }
 
-        public ICollection<DevelopTask> DevelopTask { get; set; }
+        public virtual ICollection<DevelopTask> DevelopTask { get; set; }
 
         public virtual Employee Employee { get; set; }
 

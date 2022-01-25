@@ -22,9 +22,9 @@ namespace API.Models
         public String Details{ get; set; }
 
        
-        public ICollection<ProjectHistory> ProjectHistory { get; set; }
+        public virtual ICollection<ProjectHistory> ProjectHistory { get; set; }
 
         [JsonIgnore]
-        public ICollection<AssignEmployee> AssignEmployee { get; set; }
+        public virtual ICollection<AssignEmployee> AssignEmployee { get; set; }
     }
 }
