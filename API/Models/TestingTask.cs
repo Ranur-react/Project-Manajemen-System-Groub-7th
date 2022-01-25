@@ -12,7 +12,6 @@ namespace API.Models
     public class TestingTask
     {
         [Key]
-        [Required(ErrorMessage = "it must have a value")]
         public int Id { get; set; }
         [ForeignKey("DevelopTask")]
         public int IdTask { get; set; }

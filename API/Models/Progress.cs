@@ -12,7 +12,6 @@ namespace API.Models
     public class Progress
     {
         [Key]
-        [Required(ErrorMessage = "it must have a value")]
         public int Id { get; set; }
         public String ColorCode { get; set; }
         public String Name { get; set; }

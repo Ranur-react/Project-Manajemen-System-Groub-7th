@@ -12,7 +12,6 @@ namespace API.Models
     public class Role
     {
         [Key]
-        [Required(ErrorMessage = "it must have a value")]
         public int Id { get; set; }
         [Required(ErrorMessage = "it must have a value")]
         public String Name { get; set; }

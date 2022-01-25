@@ -12,7 +12,6 @@ namespace API.Models
     public class ProjectHistory
     {
         [Key]
-        [Required(ErrorMessage = "it must have a value")]
         public int Id { get; set; }
         [ForeignKey("Project")]
         public String IdProject  { get; set; }

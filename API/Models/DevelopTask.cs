@@ -12,7 +12,6 @@ namespace API.Models
     public class DevelopTask
     {
         [Key]
-        [Required(ErrorMessage = "it must have a value")]
         public int Id { get; set; }
         [ForeignKey("Progress")]
         public int IdProgres { get; set; }
