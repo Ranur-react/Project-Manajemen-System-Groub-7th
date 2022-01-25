@@ -12,6 +12,10 @@ namespace API.Context
         public MyContext(DbContextOptions<MyContext> options) : base(options)
         {
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
         public DbSet<Account> Accounts{ get; set; }
         public DbSet<Employee> Employees{ get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -21,5 +25,9 @@ namespace API.Context
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectHistory> ProjectHistorys { get; set; }
         public DbSet<TestingTask> TestTasks{ get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+               //tulis modelBuilder dsini guys
+        }
     }
 }
