@@ -12,7 +12,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectsController : BaseController<Project, ProjectRepository, int>
+    public class ProjectsController : BaseController<Project, ProjectRepository, String>
     {
         private readonly ProjectRepository projectRepository;
 
