@@ -9296,19 +9296,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rahma\\.nuget\\packages\\": {}
+    "C:\\Users\\WINDOWS-NINE\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MCC\\MVC\\Sesi4\\Project-Manajemen-System-Groub-7th\\API\\API.csproj",
+      "projectUniqueName": "X:\\belajar\\mii\\sesi 4\\PA Manajemen\\Project-Manajemen-System-Groub-7th\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\MCC\\MVC\\Sesi4\\Project-Manajemen-System-Groub-7th\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\rahma\\.nuget\\packages\\",
-      "outputPath": "D:\\MCC\\MVC\\Sesi4\\Project-Manajemen-System-Groub-7th\\API\\obj\\",
+      "projectPath": "X:\\belajar\\mii\\sesi 4\\PA Manajemen\\Project-Manajemen-System-Groub-7th\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\WINDOWS-NINE\\.nuget\\packages\\",
+      "outputPath": "X:\\belajar\\mii\\sesi 4\\PA Manajemen\\Project-Manajemen-System-Groub-7th\\API\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\rahma\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\WINDOWS-NINE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9403,7 +9408,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

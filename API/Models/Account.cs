@@ -27,9 +27,11 @@ namespace API.Models
         [ForeignKey("Role")]
         public int RoleId { get; set; }
 
-        public virtual Role Role { get; set; }
+       public virtual Role Role { get; set; }
         [JsonIgnore]
         public virtual Employee Employee { get; set; }
+
+       // public ICollection<Role> Role { get; set; }
     }
 
 }

@@ -13,5 +13,7 @@ namespace API.ViewModel
     
         [Required]
         public string Password { get; set; }
+
+        public String Role { get; set; }
     }
 }
