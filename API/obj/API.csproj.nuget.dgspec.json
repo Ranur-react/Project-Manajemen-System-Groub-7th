@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MCC\\MVC\\TA-Sessions 4\\Project Manajemen System Groub 7th\\API\\API.csproj": {}
+    "D:\\MCC\\MVC\\Sesi4\\Project-Manajemen-System-Groub-7th\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\MCC\\MVC\\TA-Sessions 4\\Project Manajemen System Groub 7th\\API\\API.csproj": {
+    "D:\\MCC\\MVC\\Sesi4\\Project-Manajemen-System-Groub-7th\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MCC\\MVC\\TA-Sessions 4\\Project Manajemen System Groub 7th\\API\\API.csproj",
+        "projectUniqueName": "D:\\MCC\\MVC\\Sesi4\\Project-Manajemen-System-Groub-7th\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\MCC\\MVC\\TA-Sessions 4\\Project Manajemen System Groub 7th\\API\\API.csproj",
+        "projectPath": "D:\\MCC\\MVC\\Sesi4\\Project-Manajemen-System-Groub-7th\\API\\API.csproj",
         "packagesPath": "C:\\Users\\rahma\\.nuget\\packages\\",
-        "outputPath": "D:\\MCC\\MVC\\TA-Sessions 4\\Project Manajemen System Groub 7th\\API\\obj\\",
+        "outputPath": "D:\\MCC\\MVC\\Sesi4\\Project-Manajemen-System-Groub-7th\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rahma\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -44,7 +44,19 @@
               "target": "Package",
               "version": "[1.6.0, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Abstractions": {
               "target": "Package",
               "version": "[5.0.11, )"
             },
@@ -62,9 +74,21 @@
               "target": "Package",
               "version": "[5.0.11, )"
             },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.1.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[5.6.0, )"
             }
           },
           "imports": [

@@ -1,6 +1,8 @@
 ﻿using API.Context;
 using API.Models;
 using API.Models.FormModel;
+
+using API.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ namespace API.Repository.Data
 {
     public class AccountRepository: GeneralRepository<MyContext, Account, int>
     {
+
         private readonly MyContext myContext;  //koneksi dengan database
         public AccountRepository(MyContext myContext) : base(myContext) {
             this.myContext = myContext;
@@ -42,7 +45,7 @@ namespace API.Repository.Data
                           RoleName=rol.Name
                       };
             return qry;
-      
+
 
         }
         public int Register(FormRegister registerForm) //use postman  to test
@@ -139,6 +142,31 @@ namespace API.Repository.Data
             else
             {
                 return 1;
+            }
+
+        }
+
+        public int Login(LoginVM loginVM)
+        {
+            var checkUsername = myContext.Accounts.
+                Where(e => e.Username == loginVM.Username || e.Username == loginVM.Username).FirstOrDefault();
+            if (checkUsername != null)
+            {
+                var getPassword = myContext.Accounts.Where(e => e.Username == checkUsername.Username).FirstOrDefault();
+                bool checkPassword = BCrypt.Net.BCrypt.Verify(loginVM.Password, getPassword.Password);
+             //     bool checkPassword = loginVM.Password == getPassword.Password ;
+                if (checkPassword)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 3;
+                }
+            }
+            else
+            {
+                return 2;
             }
         }
     }
