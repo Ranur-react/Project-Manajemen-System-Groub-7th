@@ -63,3 +63,4 @@ D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\obj\Debug\netcor
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\obj\Debug\netcoreapp3.1\API.genruntimeconfig.cache
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\bin\Debug\netcoreapp3.1\Castle.Core.dll
 D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
+D:\MCC\MVC\TA-Sessions 4\Project Manajemen System Groub 7th\API\bin\Debug\netcoreapp3.1\BCrypt.Net-Core.dll

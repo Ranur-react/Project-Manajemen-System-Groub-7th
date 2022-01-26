@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Ng4i7+qD4cjxpaZGk1VtOjN49wkzyfWr4mtRhhzM4fuIX2x6DYzTn8/CFwDk+A/k7fj8Hez9BgCTuUEvFoAqAw==",
+  "dgSpecHash": "+n0Jy6CCKjkieQMr5P3gAgxu1eNQ/0ew8fckQapFsK37Do2PMA1u6ZZ5OSssUX6Z7xQP3PHG61/11Z4Zw/ep+g==",
   "success": true,
   "projectFilePath": "D:\\MCC\\MVC\\TA-Sessions 4\\Project Manajemen System Groub 7th\\API\\API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\rahma\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\rahma\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\rahma\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\rahma\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

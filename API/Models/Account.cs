@@ -24,6 +24,9 @@ namespace API.Models
         public String Avatar { get; set; }
         public int OTP { get; set; }
         public Boolean IsUsed { get; set; }
+        [ForeignKey("Role")]
+        public int RoleId { get; set; }
+
         public virtual Role Role { get; set; }
         [JsonIgnore]
         public virtual Employee Employee { get; set; }
