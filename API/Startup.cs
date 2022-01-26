@@ -73,7 +73,7 @@ namespace API
 
             });
 
-            services.AddSwaggerGen(c => c.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "My API", Version = "v1" }));
+           /* services.AddSwaggerGen(c => c.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "My API", Version = "v1" }));*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,11 +85,11 @@ namespace API
             }
 
             app.UseHttpsRedirection();
-            app.UseSwagger();
+           /* app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "My Api V1");
-            });
+            });*/
             app.UseHttpsRedirection();
 
             app.UseRouting();
