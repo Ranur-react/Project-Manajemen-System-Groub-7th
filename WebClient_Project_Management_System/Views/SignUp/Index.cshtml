@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout_SignUp.cshtml";
+}
+
+<form class="login100-form validate-form">
+    <span class="login100-form-title p-b-59">
+        Sign Up
+    </span>
+
+
+    <div class="wrap-input100 validate-input">
+        <span class="label-input100">Id</span>
+        <input class="input100" type="text" placeholder="Your ID" name="id" id="id_emp">
+        <span class="focus-input100"></span>
+    </div>
+
+
+
+    <div class="wrap-input100 validate-input">
+        <span class="label-input100">First Name</span>
+        <input class="input100" type="text" placeholder="First Name" name="firstname" id="firstname">
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input">
+        <span class="label-input100">Last Name</span>
+        <input class="input100" type="text" placeholder="Last Name" name="lastname" id="lastname">
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input">
+        <span class="label-input100">Phone Number</span>
+        <input class="input100" type="text" placeholder="Phone Number" name="phonenumber" id="phonenumber">
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input">
+        <span class="label-input100">Birthdate</span>
+        <input class="input100" type="date">
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+        <span class="label-input100">Email</span>
+        <input class="input100" type="text" name="email" id="email" placeholder="Email addess...">
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input">
+        <span class="label-input100">Gender</span>
+        <select id="inputGender" name="gender" class="form-control">
+            <option selected>Choose...</option>
+            <option value=0>Male</option>
+            <option value=1>Female</option>
+        </select>
+        <span class="focus-input100"></span>
+    </div>
+
+
+
+
+
+    <div class="wrap-input100 validate-input" data-validate="Password is required">
+        <span class="label-input100">Password</span>
+        <input class="input100" type="password" name="pass" placeholder="*************" id="password">
+        <span class="focus-input100"></span>
+    </div>
+
+
+    <div class="wrap-input100 validate-input">
+        <span class="label-input100">Role</span>
+        <select id="inputRole" name="gender" class="form-control">
+            <option selected>Choose...</option>
+            <option value=1>Project Manager</option>
+            <option value=2>System Analyst</option>
+            <option value=3>QA</option>
+
+        </select>
+        <span class="focus-input100"></span>
+    </div>
+
+
+    <div class="wrap-input100 validate-input">
+        <span class="label-input100">Choose a profile picture</span>
+        <input class="input100" type="file" id="file" onchange="return fileValidation()">
+
+    </div>
+
+
+    <div class="flex-m w-full p-b-33">
+        <div class="contact100-form-checkbox">
+
+        </div>
+
+
+    </div>
+
+    <div class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn">
+                Sign In
+            </button>
+        </div>
+
+        <a href="/login" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+            Login
+            <i class="fa fa-long-arrow-right m-l-5"></i>
+        </a>
+
+
+    </div>
+
+</form>
+

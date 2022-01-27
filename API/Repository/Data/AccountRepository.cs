@@ -167,8 +167,11 @@ namespace API.Repository.Data
 
         public int Login(LoginVM loginVM)
         {
-            var checkUsername = myContext.Accounts.
-                Where(e => e.Username == loginVM.Username || e.Username == loginVM.Username).FirstOrDefault();
+            var checkUsername = CheckDataAccount(CheckDataEmployee(loginVM.Username).Id);
+
+            /*var checkUsername = myContext.Accounts.
+                Where(e => e.Username == loginVM.Username || e.Username == loginVM.Username).FirstOrDefault();*/
+
             if (checkUsername != null)
             {
                 var getPassword = myContext.Accounts.Where(e => e.Username == checkUsername.Username).FirstOrDefault();
