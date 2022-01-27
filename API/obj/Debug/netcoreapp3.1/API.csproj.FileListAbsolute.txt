@@ -651,4 +651,3 @@ X:\belajar\mii\sesi 4\PA_Manajeme_2\Project-Manajemen-System-Groub-7th\API\obj\D
 X:\belajar\mii\sesi 4\PA_Manajeme_2\Project-Manajemen-System-Groub-7th\API\obj\Debug\netcoreapp3.1\API.dll
 X:\belajar\mii\sesi 4\PA_Manajeme_2\Project-Manajemen-System-Groub-7th\API\obj\Debug\netcoreapp3.1\API.pdb
 X:\belajar\mii\sesi 4\PA_Manajeme_2\Project-Manajemen-System-Groub-7th\API\obj\Debug\netcoreapp3.1\API.genruntimeconfig.cache
-X:\belajar\mii\sesi 4\PA_Manajeme_2\Project-Manajemen-System-Groub-7th\API\obj\Debug\netcoreapp3.1\API.csproj.AssemblyReference.cache
