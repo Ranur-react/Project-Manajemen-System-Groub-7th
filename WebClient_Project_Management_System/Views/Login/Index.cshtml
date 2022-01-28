@@ -11,7 +11,7 @@
 
 
     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-        <span class="label-input100">Email</span>
+        <span class="label-input100"></span>
         <input class="input100" type="text" name="email" placeholder="Email addess..." id="email">
         <span class="focus-input100"></span>
     </div>
@@ -19,18 +19,18 @@
 
 
     <div class="wrap-input100 validate-input" data-validate="Password is required">
-        <span class="label-input100">Password</span>
-        <input class="input100" id="password" type="password" name="pass" placeholder="*************">
+        <span class="label-input100"></span>
+        <input class="input100" id="password" type="password" name="pass"  placeholder="Password...">
         <span class="focus-input100"></span>
     </div>
 
 
- 
+
 
     <div class="container-login100-form-btn">
         <div class="wrap-login100-form-btn">
             <div class="login100-form-bgbtn"></div>
-            <button class="login100-form-btn">
+            <button type="button" class="login100-form-btn signbutton">
                 Sign In
             </button>
         </div>
@@ -42,9 +42,30 @@
     </div>
 
 
-    <u><a href="/forgotpassword" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
-    Forgot Password
+    <u>
+        <a href="/forgotpassword" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+            Forgot Password
 
-</a></u>
-    
+        </a>
+    </u>
 </form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.signbutton').click(() => {
+                var data = Object();
+             data.Passsword = $('#password').val();
+             data.Username = $('#Email').val();
+                $.ajax({
+                    url: '/Accounts/AuthLogin',
+                    method: 'post',
+                    data: data,
+                    success: (respond) => {
+                        console.log(respond);
+                    }
+                })
+            });
+        });
+    </script>
+}

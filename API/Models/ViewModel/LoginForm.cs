@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.ViewModel
 {
-    public class LoginVM
+    public class LoginForm
     {
         [Required]
         public string Username { get; set; }

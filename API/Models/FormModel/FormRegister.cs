@@ -21,7 +21,6 @@ namespace API.Models.FormModel
         public DateTime BirthDate { get; set; }
         [Phone(ErrorMessage = "It's must as Phone number , pelease check your value")]
         public String Phone { get; set; }
-        [Required(ErrorMessage = "it must have a value")]
         public int RoleId{ get; set; }
         [Required(ErrorMessage = "it must have a value")]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8}$",

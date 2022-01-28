@@ -1,6 +1,7 @@
 ﻿using API.Base;
 using API.Models;
 using API.Models.FormModel;
+using API.Models.ViewModel;
 using API.Repository.Data;
 using API.ViewModel;
 using Microsoft.AspNetCore.Http;
@@ -32,7 +33,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Login")]
-        public ActionResult Login(LoginVM loginVM)
+        public ActionResult Login(LoginForm loginVM)
         {
             try
             {
@@ -41,12 +42,12 @@ namespace API.Controllers
                 {
                     if(result == 3)
                     {
-                        return BadRequest(new { status = StatusCodes.Status400BadRequest, result, message = "Password salah" });
+                        return BadRequest(new RequestLoginsForms { status = StatusCodes.Status400BadRequest, result=result, message = "Password salah" });
                     }
 
                     if(result == 2)
                     {
-                        return BadRequest(new { status = StatusCodes.Status400BadRequest, result, message = "Username tidak ditemukan" });
+                        return BadRequest(new RequestLoginsForms { status = StatusCodes.Status400BadRequest, result=result, message = "Username tidak ditemukan" });
                     }
 
                     else
@@ -58,7 +59,7 @@ namespace API.Controllers
 
 
                         role = get.Name;
-                        var data = new LoginVM
+                        var data = new LoginForm
                         {
                             Username = loginVM.Username,
                             Role = role
@@ -81,8 +82,8 @@ namespace API.Controllers
                             );
                         var idToken = new JwtSecurityTokenHandler().WriteToken(token);
                         calaims.Add(new Claim("TokenSecurity", idToken.ToString()));
-
-                        return Ok(new  { Status = HttpStatusCode.OK, IdToken = idToken, Result = result, Message = "Login Berhasil" });
+                        return Ok(new RequestLoginsForms { status = StatusCodes.Status200OK, idToken = idToken, result = result, message = "Login Berhasil" });
+                        //return Ok(new RequestLoginsForms { status = HttpStatusCode.OK, IdToken = idToken, Result = result, Message = "Login Berhasil" });
 
                     }
                 }
@@ -93,7 +94,7 @@ namespace API.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(new { status = StatusCodes.Status417ExpectationFailed, errors = e.Message + "~Login Controller" });
+                return BadRequest(new RequestLoginsForms { status = StatusCodes.Status417ExpectationFailed, errors = e.Message + "~Login Controller" });
             }
         }
         [Route("RegisteredData")]
@@ -128,8 +129,8 @@ namespace API.Controllers
                 switch (result)
                 {
                     case 1:
-                        return Ok(new { status = StatusCodes.Status201Created, result, message = $"Data Berhasil Tersimpan ke [{ControllerContext.ActionDescriptor.ControllerName}]" });
-                    // return Ok(result);
+                        //return Ok(new { status = StatusCodes.Status201Created, result, message = $"Data Berhasil Tersimpan ke [{ControllerContext.ActionDescriptor.ControllerName}]" });
+                     return Ok(result);
                     case 2:
                         return BadRequest(new { status = StatusCodes.Status400BadRequest, result, message = "Pastikan  Email Belum Pernah Digunakan" });
                     case 3:
@@ -144,6 +145,78 @@ namespace API.Controllers
                 return BadRequest(new { status = StatusCodes.Status417ExpectationFailed, errors = e.Message });
             }
         }
+        [Route("Forgot")]
+        [HttpPost]
+        public ActionResult Forgot(MailForm mailForm)
+        {
+            try
+            {
+                var result = accountRepository.ForgotPassword(mailForm);
+                if (result > 0)
+                {
+                    if (result == 2)
+                    {
+                        return BadRequest(new { status = StatusCodes.Status400BadRequest, result, message = "Akun tidak ditemukan, email / phonsell yang digunakan tidak terdaftar didatabase " });
+                    }
+                    else if (result == 3)
+                    {
+                        return BadRequest(new { status = StatusCodes.Status400BadRequest, result, message = "OTP Gagal Dikirimkan ke Email mu, ulangi" });
+                    }
+                    else
+                    {
+                        return Ok(new { status = StatusCodes.Status201Created, result, message = "OTP Dikirimkan ke Email mu, Periksa Kotak Masuk atau folder SPAM di Email mu" });
+                    }
+                }
+                else
+                {
+                    return BadRequest(new { status = StatusCodes.Status400BadRequest, result, message = $" Data gagal Ditambahkan Sudah ada di dalam database" });
+                }
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { status = StatusCodes.Status417ExpectationFailed, errors = e.Message });
+            }
+        }
+        [Route("ChangePassword")]
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordForm cForm)
+        {
+            try
+            {
+                var result = accountRepository.ChangePassword(cForm);
+                if (result > 0)
+                {
+                    if (result == 2)
+                    {
+                        return BadRequest(new { status = StatusCodes.Status400BadRequest, result, message = "Token Sudah digunakan, Kirim Token ulang" });
+                    }
+                    else if (result == 3)
+                    {
+                        return BadRequest(new { status = StatusCodes.Status400BadRequest, result, message = "Token Sudah kadaluarsa, Kirim Token ulang" });
+                    }
+                    else if (result == 4)
+                    {
+                        return BadRequest(new { status = StatusCodes.Status400BadRequest, result, message = "Token Salah , Check kembali atau coba kirim ulang" });
+                    }
+                    else
+                    {
+                        //panggil Mail sender disini
+                        return Ok(new { status = StatusCodes.Status201Created, result, message = "Token benar, Password sudah berhasil dirubah" });
+                    }
+                }
+                else
+                {
+                    return BadRequest(new { status = StatusCodes.Status400BadRequest, result, message = $" Data gagal diproses Sudah ada di dalam database" });
+                }
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { status = StatusCodes.Status417ExpectationFailed, errors = e.Message + "~Controller" });
+            }
+        }
+
 
     }
 }

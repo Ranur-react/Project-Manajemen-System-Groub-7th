@@ -2,6 +2,9 @@
 using API.Models;
 using API.Models.FormModel;
 using API.ViewModel;
+using MailKit.Net.Smtp;
+using Microsoft.EntityFrameworkCore;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,11 +108,15 @@ namespace API.Repository.Data
                 };
                 myContext.Employees.Add(emp);
                 myContext.SaveChanges();
+                var roleId = 0;
+                if (registerForm.RoleId != null) {
+                    roleId = registerForm.RoleId;
+                }
                 var act = new Account
                 {
                     Username = emp.Id,
                     Password = BCrypt.Net.BCrypt.HashPassword(registerForm.Password),
-                    RoleId = registerForm.RoleId,
+                    RoleId = roleId,
                     Status = 0,
                     Avatar = registerForm.Avatar
                 };
@@ -165,7 +172,7 @@ namespace API.Repository.Data
 
         }
 
-        public int Login(LoginVM loginVM)
+        public int Login(LoginForm loginVM)
         {
             var checkUsername = CheckDataAccount(CheckDataEmployee(loginVM.Username).Id);
 
@@ -190,6 +197,136 @@ namespace API.Repository.Data
             {
                 return 2;
             }
+        }
+        public int ForgotPassword(MailForm mailForm)
+        {
+            var checkEmail = CheckDataEmployee(mailForm.Email);
+            if (checkEmail != null)
+            {
+                // 1. buat token
+                var tokenGenerate = GenerateToken();
+                var checkAccount = CheckDataAccount(checkEmail.Id);
+                if (checkAccount != null)
+                {
+                    myContext.Entry(checkAccount).State = EntityState.Detached;
+                }
+
+                checkAccount.OTP = tokenGenerate;
+                // 2. buat waktu kadaluarsa
+                var timeNow = DateTime.Now.AddMinutes(5);
+                checkAccount.ExpiredToken = timeNow;
+                checkAccount.IsUsed = true;
+                // 3. Simpan ke database
+                myContext.Entry(checkAccount).State = EntityState.Modified;
+                var dbRespond = myContext.SaveChanges();
+                // 4. buat konten / element dari email yang akan diri
+                var mailContent = new MailContent
+                {
+                    Email = checkEmail.Email,
+                    TimeNow = timeNow,
+                    Token = tokenGenerate,
+                    body = $"{checkEmail.LastName},{checkEmail.FirstName} "
+                };
+                //panggil Mail sender disini
+                var respond = SendMail(mailContent);
+
+                switch (respond)
+                {
+                    case 1:
+                        return dbRespond;
+                    default:
+                        return 3;
+                }
+            }
+            else
+            {
+                return 2;
+
+            }
+        }
+        public int GenerateToken()
+        {
+            int _min = 111111;
+            int _max = 999999;
+            Random _rdm = new Random();
+            return _rdm.Next(_min, _max);
+        }
+        public int SendMail(MailContent mailContent)
+        {
+            try
+            {
+                MimeMessage message = new MimeMessage();
+
+                MailboxAddress from = new MailboxAddress("noreply",
+                "dumy@gunungmas-seluler.com");
+                message.From.Add(from);
+
+                MailboxAddress to = new MailboxAddress(mailContent.body,
+                mailContent.Email);
+                message.To.Add(to);
+
+                message.Subject = "OTP Lupa Password";
+                BodyBuilder bodyBuilder = new BodyBuilder();
+                bodyBuilder.HtmlBody = $"<h2>OTP : {mailContent.Token}</h2>" +
+                    $"<br>" +
+                    $"<p align=\"center\">Masukan OTP di halaman ganti password sebelum {mailContent.TimeNow} agar password anda dapat anda ganti</p>";
+                message.Body = bodyBuilder.ToMessageBody();
+
+                SmtpClient client = new SmtpClient();
+                client.Connect("mail.gunungmas-seluler.com", 465, true);
+                client.Authenticate("dumy@gunungmas-seluler.com", "Dumy0@@@");
+                client.Send(message);
+                client.Disconnect(true);
+                client.Dispose();
+                return 1;
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+        }
+        public int ChangePassword(ChangePasswordForm cForm)
+        {
+            try
+            {
+                var dataAccount = Registered(cForm.Email);
+                if (dataAccount.OTP != cForm.OTP)
+                {
+                    return 4;
+                }
+                else
+                {
+                    if (dataAccount.ExpiredToken < DateTime.Now)
+                    {
+                        return 3;
+                    }
+                    else
+                    {
+                        if (!dataAccount.IsUsed)
+                        {
+                            return 2;
+                        }
+                        else
+                        {
+                            if (dataAccount != null)
+                            {
+                                myContext.Entry(dataAccount).State = EntityState.Detached;
+                            }
+
+                            dataAccount.Password = BCrypt.Net.BCrypt.HashPassword(cForm.Password);
+                            dataAccount.IsUsed = false;
+                            myContext.Entry(dataAccount).State = EntityState.Modified;
+                            return myContext.SaveChanges();
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
         }
     }
 }
