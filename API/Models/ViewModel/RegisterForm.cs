@@ -24,7 +24,7 @@ namespace API.Models.ViewModel
         [Required(ErrorMessage = "it must have a value")]
         public virtual String Password { get; set; }
 
-        public String Avater { get; set; }
+        public String Avatar { get; set; }
         public String RoleId { get; set; }
 
 
