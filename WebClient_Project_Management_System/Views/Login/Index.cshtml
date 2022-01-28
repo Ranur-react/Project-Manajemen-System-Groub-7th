@@ -54,9 +54,9 @@
     <script>
         $(document).ready(function () {
             $('.signbutton').click(() => {
-                var data = Object();
-             data.Passsword = $('#password').val();
-             data.Username = $('#Email').val();
+                var data = new Object();
+             data.Password = $('#password').val();
+                data.Username = $('#email').val();
                 $.ajax({
                     url: '/Accounts/AuthLogin',
                     method: 'post',
