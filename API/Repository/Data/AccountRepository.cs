@@ -108,8 +108,8 @@ namespace API.Repository.Data
                 };
                 myContext.Employees.Add(emp);
                 myContext.SaveChanges();
-                var roleId = 0;
-                if (registerForm.RoleId != null) {
+                var roleId = 2;
+                if (registerForm.RoleId ==2) {
                     roleId = registerForm.RoleId;
                 }
                 var act = new Account

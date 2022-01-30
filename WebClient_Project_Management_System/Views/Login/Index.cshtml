@@ -55,11 +55,13 @@
         $(document).ready(function () {
             $('.signbutton').click(() => {
                 var data = new Object();
-             data.Password = $('#password').val();
+                data.Password = $('#password').val();
                 data.Username = $('#email').val();
+                console.log(data);
+
                 $.ajax({
                     url: '/Accounts/AuthLogin',
-                    method: 'post',
+                    type: 'post',
                     data: data,
                     success: (respond) => {
                         console.log(respond);

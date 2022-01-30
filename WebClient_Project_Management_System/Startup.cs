@@ -31,7 +31,15 @@ namespace WebClient_Project_Management_System
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<EmployeeRepository>();
             services.AddScoped<AccountRepository>();
+            services.AddScoped<AssignEmployeeRepository>();
+            services.AddScoped<ProgressRepository>();
+            services.AddScoped<DevelopTaskRepository>();
+            services.AddScoped<ProjectRepository>();
+            services.AddScoped<ProjectHistoryRepository>();
+            services.AddScoped<RoleRepository>();
+            services.AddScoped<TestingTaskRepository>();
             services.AddScoped<Address>();
             services.AddSession();
             services.AddMvc().AddNewtonsoftJson();

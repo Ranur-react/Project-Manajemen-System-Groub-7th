@@ -52,6 +52,7 @@ namespace WebClient_Project_Management_System.Repositories
 
 
 
+
         public async Task<TEntity> Get(TId id)
         {
             TEntity entity = null;
