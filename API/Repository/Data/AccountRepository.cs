@@ -108,7 +108,7 @@ namespace API.Repository.Data
                 };
                 myContext.Employees.Add(emp);
                 myContext.SaveChanges();
-                var roleId = 2;
+                var roleId = 1;
                 if (registerForm.RoleId ==2) {
                     roleId = registerForm.RoleId;
                 }
@@ -175,29 +175,35 @@ namespace API.Repository.Data
         public int Login(LoginForm loginVM)
         {
             var ce = CheckDataEmployee(loginVM.Username);
-
-            var checkUsername = CheckDataAccount(ce.Id);
-
-            /*var checkUsername = myContext.Accounts.
-                Where(e => e.Username == loginVM.Username || e.Username == loginVM.Username).FirstOrDefault();*/
-
-            if (checkUsername != null)
+            if (ce != null)
             {
-                var getPassword = myContext.Accounts.Where(e => e.Username == checkUsername.Username).FirstOrDefault();
-                bool checkPassword = BCrypt.Net.BCrypt.Verify(loginVM.Password, getPassword.Password);
-                //     bool checkPassword = loginVM.Password == getPassword.Password ;
-                if (checkPassword)
+
+                var checkUsername = CheckDataAccount(ce.Id);
+
+                /*var checkUsername = myContext.Accounts.
+                    Where(e => e.Username == loginVM.Username || e.Username == loginVM.Username).FirstOrDefault();*/
+
+                if (checkUsername != null)
                 {
-                    return 1;
+                    var getPassword = myContext.Accounts.Where(e => e.Username == checkUsername.Username).FirstOrDefault();
+                    bool checkPassword = BCrypt.Net.BCrypt.Verify(loginVM.Password, getPassword.Password);
+                    //     bool checkPassword = loginVM.Password == getPassword.Password ;
+                    if (checkPassword)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 3;
+                    }
                 }
                 else
                 {
-                    return 3;
+                    return 2;
                 }
             }
-            else
-            {
-                return 2;
+            else {
+                return 0;
             }
         }
         public int ForgotPassword(MailForm mailForm)

@@ -70,14 +70,33 @@
                         $('.signbutton').html("Loading . .");
                         $('.signbutton').attr("disabled", true)
                     },
-                   
+
                 }).done((respond) => {
-                  $('.signbutton').html("Sign In");
+                    $('.signbutton').html("Sign In");
                     $('.signbutton').attr("disabled", false);
                     if (respond != null) {
                         console.log(respond);
+                        switch (respond.result) {
+                            case 1:
+                                poUPAlertSweet("success", "Berhasil Login", "", "center");
+                                window.location.href = "/Dashboard";
+
+                                break;
+                            case 2:
+                                poUPAlertSweet("error", "Gagal", respond.message, "center")
+                                break;
+                            case 3:
+                                poUPAlertSweet("error", "Gagal", respond.message , "center")
+                                break;
+                            default:
+                                poUPAlertSweet("error", "Gagal", respond.message + " \nEror: " + respond.errors, "center")
+                                break;
+                        }
+
                     }
-                })
+                }).fail((e) => {
+                    poUPAlertSweet("error", "Gagal", JSON.stringify(e), "center")
+                });
             });
         });
     </script>

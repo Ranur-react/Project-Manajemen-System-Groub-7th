@@ -28,11 +28,13 @@
     <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="css/util.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">\
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.4/dist/sweetalert2.min.css">
+    @RenderSection("CustomeStyle", required: false)
     <!--===============================================================================================-->
 </head>
-<body  style="background-color: #999999;">
-    
+<body style="background-color: #999999;">
+
     <div class="limiter">
         <div class="container-login100">
             <div class="login100-more" style="background-image: url('images/bg-01.png');"></div>
@@ -43,10 +45,23 @@
         </div>
     </div>
 
-   
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.4/dist/sweetalert2.all.min.js"></script>
+    <script>
+        const poUPAlertSweet = (state, title, texts, positions) => {
+            return Swal.fire({
+                position: positions,
+                icon: state,
+                title: title,
+                text: texts,
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

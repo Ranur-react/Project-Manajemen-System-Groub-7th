@@ -89,7 +89,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return BadRequest(new RequestLoginsForms { status = StatusCodes.Status400BadRequest, result = result, message = "Login Gagal, Akun tidak ditemukan" });
+                    return BadRequest(new RequestLoginsForms { status = StatusCodes.Status400BadRequest, result = result, message = "Login Gagal, Anda belum registrasi" });
 
                 }
             }
