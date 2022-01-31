@@ -12,6 +12,7 @@ namespace API.Models
     public class Project
     {
         [Key]
+        [Required(ErrorMessage = "it must have a value")]
         public String Id { get; set; }
         [Required(ErrorMessage = "it must have a value")]
         public String Name { get; set; }
