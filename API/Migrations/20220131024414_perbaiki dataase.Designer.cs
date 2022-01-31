@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20220129033311_ubahadata")]
-    partial class ubahadata
+    [Migration("20220131024414_perbaiki dataase")]
+    partial class perbaikidataase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,7 +44,6 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")

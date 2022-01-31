@@ -57,13 +57,24 @@
                 var data = new Object();
                 data.Password = $('#password').val();
                 data.Username = $('#email').val();
+                console.log("Data Form");
+
                 console.log(data);
 
                 $.ajax({
                     url: '/Accounts/AuthLogin',
                     type: 'post',
                     data: data,
-                    success: (respond) => {
+                    beforeSend: (e) => {
+                        console.log("Before Login");
+                        $('.signbutton').html("Loading . .");
+                        $('.signbutton').attr("disabled", true)
+                    },
+                   
+                }).done((respond) => {
+                  $('.signbutton').html("Sign In");
+                    $('.signbutton').attr("disabled", false);
+                    if (respond != null) {
                         console.log(respond);
                     }
                 })

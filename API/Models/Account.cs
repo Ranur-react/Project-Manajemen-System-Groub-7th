@@ -13,7 +13,6 @@ namespace API.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage = "it must have a value")]
         public String Password { get; set; }
         [ForeignKey("Employee")]
         [Required(ErrorMessage = "it must have a value")]

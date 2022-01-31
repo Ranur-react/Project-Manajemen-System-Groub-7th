@@ -89,7 +89,8 @@ namespace API.Controllers
                 }
                 else
                 {
-                    return BadRequest();
+                    return BadRequest(new RequestLoginsForms { status = StatusCodes.Status400BadRequest, result = result, message = "Login Gagal, Akun tidak ditemukan" });
+
                 }
             }
             catch (Exception e)

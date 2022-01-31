@@ -42,7 +42,6 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")

@@ -174,7 +174,9 @@ namespace API.Repository.Data
 
         public int Login(LoginForm loginVM)
         {
-            var checkUsername = CheckDataAccount(CheckDataEmployee(loginVM.Username).Id);
+            var ce = CheckDataEmployee(loginVM.Username);
+
+            var checkUsername = CheckDataAccount(ce.Id);
 
             /*var checkUsername = myContext.Accounts.
                 Where(e => e.Username == loginVM.Username || e.Username == loginVM.Username).FirstOrDefault();*/

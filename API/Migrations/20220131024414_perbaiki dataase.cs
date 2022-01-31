@@ -2,7 +2,7 @@
 
 namespace API.Migrations
 {
-    public partial class ubahadata : Migration
+    public partial class perbaikidataase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,6 +19,14 @@ namespace API.Migrations
                 oldClrType: typeof(int),
                 oldType: "int",
                 oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Password",
+                table: "Tb_M_Accounts",
+                type: "nvarchar(max)",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Tb_M_Accounts_Tb_M_Roles_RoleId",
@@ -42,6 +50,16 @@ namespace API.Migrations
                 nullable: true,
                 oldClrType: typeof(int),
                 oldType: "int");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Password",
+                table: "Tb_M_Accounts",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Tb_M_Accounts_Tb_M_Roles_RoleId",
