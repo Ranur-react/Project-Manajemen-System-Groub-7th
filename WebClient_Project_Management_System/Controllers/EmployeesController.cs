@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using WebClient_Project_Management_System.Repositories.Data;
 
 namespace WebClient_Project_Management_System.Controllers
 {
+    [Authorize]
     public class EmployeesController : BaseController<Employee, EmployeeRepository, String>
     {
         private readonly EmployeeRepository EmployeeRepository;

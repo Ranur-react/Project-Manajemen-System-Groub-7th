@@ -29,8 +29,9 @@ namespace WebClient_Project_Management_System.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("index", "Logins");
+            return RedirectToAction("index", "Login", new { src = "logout" });
         }
+
        /* [HttpPost]*/
 /*        public async Task<IActionResult> Auth(LoginForm login)
         {

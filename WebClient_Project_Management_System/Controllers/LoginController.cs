@@ -8,12 +8,11 @@ namespace WebClient_Project_Management_System.Controllers
 {
     public class LoginController : Controller
     {
-        public IActionResult Index(string returnUrl)
+        public IActionResult Index(string src)
         {
 
-            ViewData["returnUrl"] = returnUrl;
-            ViewData["WelComeTitle"] = returnUrl == null ? "Login" : "Relogin";
-
+            ViewData["src"] = src;
+            ViewData["WelComeTitle"] = src == null ? "Sign In" : "Relogin";
             return View();
         }
     }
