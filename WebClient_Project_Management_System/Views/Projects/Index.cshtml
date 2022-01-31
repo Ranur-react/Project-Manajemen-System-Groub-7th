@@ -1,7 +1,68 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Projects";
+    Layout = "~/Views/Shared/_LayoutHomer.cshtml";
+}
+<div class="content">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="hpanel">
+                        <div class="panel-body">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Search projects..">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 listProjects">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Projects/GetAll',
+                type: 'get'
+
+            }).done((respond) => {
+                console.log(respond);
+                var data = "";
+                $.each(respond, (k,v) => {
+                    data += itemProject(v.name, v.details, v.Id + " s/d " + v.assignDate, "Requirement", "fa-level-up text-success");
+
+                })
+                $('.listProjects').html(data);
+            }).fail((e) => {
+                console.log(e);
+            });
+        });
+        const itemProject = (title, texts, lastDateHistry, statusTask,IconTask) => {
+
+            return `<div class="hpanel filter-item">
+                        <a href="#">
+                            <div class="panel-body">
+                                <div class="pull-right text-right">
+                                    <small class="stat-label">${lastDateHistry}</small>
+                                    <h4>${statusTask} <i class="fa ${IconTask}"></i></h4>
+                                </div>
+                                <h4 class="m-b-xs">${title}</h4>
+                                <p class="small">${texts.slice(0,100)} . . .</p>
+                            </div>
+                        </a>
+                    </div>`;
+        }
+    </script>
 }
 
-<h1>Index</h1>
 

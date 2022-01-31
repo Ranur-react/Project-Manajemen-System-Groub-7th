@@ -16,4 +16,8 @@
     <ProjectReference Include="..\API\API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Template\HomerPro\" />
+  </ItemGroup>
+
 </Project>
