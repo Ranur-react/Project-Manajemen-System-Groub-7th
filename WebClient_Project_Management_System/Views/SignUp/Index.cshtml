@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout_SignUp.cshtml";
 }
 
-<form class="login100-form validate-form">
+<form class="login100-form validate-form" id="formRegister">
     <span class="login100-form-title p-b-59">
         Sign Up
     </span>
@@ -37,7 +37,7 @@
 
     <div class="wrap-input100 validate-input">
         <span class="label-input100">Birthdate</span>
-        <input class="input100" type="date">
+        <input class="input100" type="date" id="Birthdate" name="birthdate">
         <span class="focus-input100"></span>
     </div>
 
@@ -58,9 +58,6 @@
     </div>
 
 
-
-
-
     <div class="wrap-input100 validate-input" data-validate="Password is required">
         <span class="label-input100">Password</span>
         <input class="input100" type="password" name="pass" placeholder="*************" id="password">
@@ -70,9 +67,9 @@
 
     <div class="wrap-input100 validate-input">
         <span class="label-input100">Role</span>
-        <select id="inputRole" name="gender" class="form-control">
-            <option selected>Choose...</option>
-            <option value=1>Project Manager</option>
+        <select id="inputRole" name="role" class="form-control">
+          
+            <option selected value=1>Project Manager</option>
             <option value=2>System Analyst</option>
             <option value=3>QA</option>
 
@@ -83,7 +80,7 @@
 
     <div class="wrap-input100 validate-input">
         <span class="label-input100">Choose a profile picture</span>
-        <input class="input100" type="file" id="file" onchange="return fileValidation()">
+        <input class="input100" type="file" id="avatar" onchange="return fileValidation()">
 
     </div>
 
@@ -100,7 +97,7 @@
         <div class="wrap-login100-form-btn">
             <div class="login100-form-bgbtn"></div>
             <button class="login100-form-btn">
-                Sign In
+                Sign Up
             </button>
         </div>
 
@@ -114,3 +111,9 @@
 
 </form>
 
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script src="~/js/register.js"></script>
+
+}
