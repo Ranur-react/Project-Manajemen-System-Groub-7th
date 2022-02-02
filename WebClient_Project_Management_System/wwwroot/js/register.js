@@ -9,7 +9,6 @@
     data.Email = $("#email").val();
     data.Gender = $("#inputGender").val();
     data.Password = $("#password").val();
-    data.Role = $("#inputRole").val();
     data.Avatar = $("#avatar").val();
 
 
@@ -18,16 +17,17 @@
     console.log(JSON.stringify(data));
 
     $.ajax({
-        url: "http://localhost:44376/api/accounts/register",
+        url: "accounts/RegisterNew",
         type: "post",
-        data:data
+        dataType:"json",
+        data: JSON.stringify(data)
     }).done((result) => {
         console.log(result.status)
         console.log("Success");
         Swal.fire({
             title: 'Success!',
             text: "Data Successfuly Inserted",
-            icon: 'Success',
+            icon: 'success',
             confirmButtonText: 'Cool'
         })
     }).fail((error) => {
@@ -70,6 +70,17 @@ $("#formRegister").validate({
 
     },
     submitHandler: function (form) {
-        postEmployee(); //request POST
+        postEmployee();
+        getRole()//request POST
     }
 });
+
+function getRole() {
+    $.ajax({
+        url:'roles/getall',
+    }).done((data) => {
+        console.log(data);
+    }).fail((error) => {
+        console.log(error);
+    })
+}
