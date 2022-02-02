@@ -1,4 +1,60 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿<div class="modal fade" id="EditProjectModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Crete Project</h4>
+                <small class="font-bold">new project aour be doing toghtehr</small>
+            </div>
+            <div class="modal-body ">
+                <form method="post" class="form-horizontal validate-form" id="idformproject" action="/projects/add">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Id Project</label>
+
+                        <div class="col-sm-10"><input type="text" id="Id-Edit" name="Id" readonly class="form-control" required></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Name Project</label>
+
+                        <div class="col-sm-10"><input type="text" class="form-control" id="Name-Edit" name="Name" required></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Start Date Project</label>
+
+                        <div class="col-sm-10"><input type="date" class="form-control" id="AssignDate-Edit" name="AssignDate" required></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">End Date Project</label>
+
+                        <div class="col-sm-10"><input type="date" class="form-control" id="EndDate-Edit" name="EndDate" required></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Detail Project</label>
+
+                        <div class="col-sm-10"><input type="text" class="form-control" id="Details-Edit" name="Details" required></div>
+                    </div>
+
+
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <button class="btn btn-default" type="submit">Cancel</button>
+                            <button class="btn btn-primary" type="submit">Save changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
