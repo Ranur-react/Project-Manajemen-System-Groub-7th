@@ -47,6 +47,12 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
+            reload();
+
+        });
+
+
+        const reload = () => {
             $.ajax({
                 url: '/Projects/GetAll',
                 type: 'get'
@@ -55,15 +61,14 @@
                 console.log(respond);
                 var data = "";
                 $.each(respond, (k, v) => {
-                    data += itemProject(v.id,v.name, v.details,v.assignDate, "Requirement", "fa-level-up text-success");
+                    data += itemProject(v.id, v.name, v.details, v.assignDate, "Requirement", "fa-level-up text-success");
 
                 })
                 $('.listProjects').html(data);
             }).fail((e) => {
                 console.log(e);
             });
-
-        });
+        }
 
         const itemProject = (id,title, texts, lastDateHistry, statusTask, IconTask) => {
 
@@ -147,6 +152,34 @@
                 }
             });
     </script>
+
+    <script>
+            const edit = () => {
+             
+                    var form = $("#idformprojectupdate");
+                    var actionUrl = "/projects/put";
+                    $.ajax({
+                        type: "PUT",
+                        url: actionUrl,
+                        data: form.serialize(), // serializes the form's elements.
+                        success: function (data) {
+                            console.log(data);
+                            switch (data) {
+                                case 200:
+                                    poUPAlertSweet("success", "Edit Project Berhasil", "", "center");
+                                    reload();
+                                    reloadDetail();
+                                    //window.location.href="/Login"
+                                    break;
+                                default:
+                                    poUPAlertSweet("error", "Edit Project Gagal", JSON.stringify(data), "center");
+                                    break;
+                            }
+                        }
+                    });
+            }
+    </script>
+
 }
 
 
