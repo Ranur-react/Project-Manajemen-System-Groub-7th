@@ -33,13 +33,15 @@
                 $('.projectDetails').text(respond.details);
                 $('.assignDate').text(respond.assignDate);
                 $('.endDate').text(respond.endDate);
-
+                $('.button-action').html(`<button class="btn btn-default btn-xs" onClick="openmodaledit('${respond.id}')"><i class="fa fa-pencil"></i> Edit Project</button>`)
                
             }).fail((e) => {
                 console.log(e);
             });
+        
+    });
 
-        });
+   
 
 </script>
 

@@ -40,6 +40,8 @@
 <div class="ProjectContent"></div>
 @section HideComponents{
     @Html.Partial("_ModalProjects")
+    @Html.Partial("CRUD/ModalAdd")
+    @Html.Partial("CRUD/ModalEdit")
 }
 
 @section Scripts{
@@ -97,7 +99,55 @@
                     $(".ProjectContent").html(content);
                     });*@
         }
+        const openmodaledit = (Id) => {
+            $('#EditProjectModal').modal('show');
+             var obj = new Object();
+        obj.Id = Id;
+        console.log(obj);
+            $.ajax({
+                url: '/Projects/GetById',
+                type: 'POST',
+                data: obj
+
+            }).done((respond) => {
+                console.log(respond);
+                $('#Id-Edit').val(respond.id);
+                $('#Name-Edit').val(respond.name);
+                $('#Details-Edit').val(respond.details);
+                $('#AssignDate-Edit').val(new Date(respond.assignDate).toISOString().substring(0, 10));
+                $('#EndDate-Edit').val(new Date(respond.endDate).toISOString().substring(0, 10));
+            }).fail((e) => {
+                console.log(e);
+            });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+    <script>
+        $("#idformproject").submit(function (e) {
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+            var form = $(this);
+            var actionUrl = form.attr('action');
+            $.ajax({
+                type: "POST",
+                url: actionUrl,
+                data: form.serialize(), // serializes the form's elements.
+                success: function (data) {
+                    console.log(data);
+                    switch (data) {
+                        case 1:
+                            poUPAlertSweet("success", "Tambah Project Berhasil", "", "center");
+                            //window.location.href="/Login"
+                            break;
+                        default:
+                            poUPAlertSweet("error", "Tambah Project Gagal", JSON.stringify(data), "center");
+                            break;
+                    }
+                }
+            });
     </script>
 }
+
 
 

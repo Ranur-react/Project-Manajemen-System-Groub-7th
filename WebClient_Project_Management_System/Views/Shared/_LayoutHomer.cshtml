@@ -40,10 +40,25 @@
 
     <!-- App scripts -->
     <script src="~/Template/HomerPro/scripts/homer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        const poUPAlertSweet = (state, title, texts, positions) => {
+            return Swal.fire({
+                position: positions,
+                icon: state,
+                title: title,
+                text: texts,
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+    </script>
 
     <!-- Local script for menu handle -->
 
     @RenderSection("Scripts", required: false)
     @RenderSection("ModalScripts", required: false)
+
 </body>
 </html>

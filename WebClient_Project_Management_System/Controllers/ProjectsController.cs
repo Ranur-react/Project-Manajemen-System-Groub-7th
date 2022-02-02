@@ -40,5 +40,14 @@ namespace WebClient_Project_Management_System.Controllers
                 ViewBag.IdProject= id;
             return View();
         }
+
+
+        [HttpPost]
+        public IActionResult Add (Project entity)
+        {
+            var result =  projectRepository.Post(entity);
+            return RedirectToAction("index", "Projects");
+        }
+
     }
 }
