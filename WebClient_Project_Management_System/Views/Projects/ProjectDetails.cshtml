@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal fade" id="ProjectModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal title</h4>
+                <small class="font-bold">@ViewBag.IdProject</small>
+            </div>
+            <div class="modal-body ">
+                @Html.Partial("ProjectDetails/View")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var obj = new Object();
+        obj.Id = '@ViewBag.IdProject';
+        console.log(obj);
+            $.ajax({
+                url: '/Projects/GetById',
+                type: 'POST',
+                data: obj
+
+            }).done((respond) => {
+                console.log(respond);
+                $('.modal-title').text(respond.name);
+                $('.projectDetails').text(respond.details);
+                $('.assignDate').text(respond.assignDate);
+                $('.endDate').text(respond.endDate);
+
+               
+            }).fail((e) => {
+                console.log(e);
+            });
+
+        });
+
+</script>
+
+

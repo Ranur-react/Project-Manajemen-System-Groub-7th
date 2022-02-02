@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebClient_Project_Management_System.Models;
 using WebClient_Project_Management_System.Repositories.Interface;
 
 namespace WebClient_Project_Management_System.Base
@@ -25,7 +26,6 @@ namespace WebClient_Project_Management_System.Base
             var result = await repository.Get();
             return Json(result);
         }
-
         [HttpGet]
         public async Task<JsonResult> Get(TId id)
         {

@@ -25,56 +25,25 @@
 </head>
 <body class="landing-page">
 
-    <!-- Simple splash screen-->
-    <div class="splash"> <div class="color-line"></div><div class="splash-title"><h1>Homer - Responsive Admin Theme</h1><p>Special Admin Theme for small and medium webapp with very clean and aesthetic style and feel. </p><div class="spinner"> <div class="rect1"></div> <div class="rect2"></div> <div class="rect3"></div> <div class="rect4"></div> <div class="rect5"></div> </div> </div> </div>
-    <!--[if lt IE 7]>
-    <p class="alert alert-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="index.html" class="navbar-brand">PROJECT</a>
-                <div class="brand-desc">
-                    Project Managemetn System
-                </div>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a class="page-scroll" href="#page-top">Home</a></li>
-                    <li><a class="page-scroll" page-scroll href="#contact">Project</a></li>
-                    <li><a class="page-scroll" page-scroll href="#contact">History Project</a></li>
-                    <li><a class="page-scroll" page-scroll href="#contact">Employee and Projects</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-
-        @RenderBody()
-
-
+    @RenderSection("Menubar", required: false)
+    @RenderBody()
+    @RenderSection("HideComponents", required: false)
 
     <!-- Vendor scripts -->
     <script src="~/Template/HomerPro/vendor/jquery/dist/jquery.min.js"></script>
     <script src="~/Template/HomerPro/vendor/jquery-ui/jquery-ui.min.js"></script>
     <script src="~/Template/HomerPro/vendor/slimScroll/jquery.slimscroll.min.js"></script>
-    <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/Template/HomerPro/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/Template/HomerPro/vendor/metisMenu/dist/metisMenu.min.js"></script>
     <script src="~/Template/HomerPro/vendor/iCheck/icheck.min.js"></script>
     <script src="~/Template/HomerPro/vendor/sparkline/index.js"></script>
 
     <!-- App scripts -->
-    <script src="scripts/homer.js"></script>
+    <script src="~/Template/HomerPro/scripts/homer.js"></script>
 
     <!-- Local script for menu handle -->
-   
+
     @RenderSection("Scripts", required: false)
+    @RenderSection("ModalScripts", required: false)
 </body>
 </html>

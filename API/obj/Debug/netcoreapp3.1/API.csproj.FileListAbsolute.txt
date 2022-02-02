@@ -798,4 +798,3 @@ D:\MCC\MVC\p4\Project-Manajemen-System-Groub-7th\API\obj\Debug\netcoreapp3.1\API
 D:\MCC\MVC\p4\Project-Manajemen-System-Groub-7th\API\obj\Debug\netcoreapp3.1\API.dll
 D:\MCC\MVC\p4\Project-Manajemen-System-Groub-7th\API\obj\Debug\netcoreapp3.1\API.pdb
 D:\MCC\MVC\p4\Project-Manajemen-System-Groub-7th\API\obj\Debug\netcoreapp3.1\API.genruntimeconfig.cache
-D:\MCC\MVC\p4\Project-Manajemen-System-Groub-7th\API\obj\Debug\netcoreapp3.1\API.csproj.AssemblyReference.cache
