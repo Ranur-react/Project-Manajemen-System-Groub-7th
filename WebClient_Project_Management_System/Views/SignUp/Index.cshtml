@@ -1,89 +1,74 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    Layout = "~/Views/Shared/_Layout_SignUp.cshtml";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
 }
-
-<form class="login100-form validate-form">
+<form class="login100-form validate-form" action="/Accounts/RegisterNew" id="idFormRegister">
     <span class="login100-form-title p-b-59">
-        Sign Up
+        Sign Up 
     </span>
-
-
     <div class="wrap-input100 validate-input">
-        <span class="label-input100">Id</span>
-        <input class="input100" type="text" placeholder="Your ID" name="id" id="id_emp">
+        <span class="label-input100">User Identity/Username</span>
+        <input class="input100" type="text" placeholder="Your ID" required name="Id" id="Id">
         <span class="focus-input100"></span>
     </div>
-
-
-
     <div class="wrap-input100 validate-input">
         <span class="label-input100">First Name</span>
-        <input class="input100" type="text" placeholder="First Name" name="firstname" id="firstname">
+        <input class="input100" type="text" placeholder="First Name" required name="FirstName" id="FirstName">
         <span class="focus-input100"></span>
     </div>
-
     <div class="wrap-input100 validate-input">
         <span class="label-input100">Last Name</span>
-        <input class="input100" type="text" placeholder="Last Name" name="lastname" id="lastname">
+        <input class="input100" type="text" placeholder="Last Name" required name="LastName" id="LastName">
         <span class="focus-input100"></span>
     </div>
-
     <div class="wrap-input100 validate-input">
         <span class="label-input100">Phone Number</span>
-        <input class="input100" type="text" placeholder="Phone Number" name="phonenumber" id="phonenumber">
+        <input class="input100" type="tel" placeholder="Phone Number" required name="Phone" id="Phone">
         <span class="focus-input100"></span>
     </div>
 
     <div class="wrap-input100 validate-input">
         <span class="label-input100">Birthdate</span>
-        <input class="input100" type="date">
+        <input class="input100" id="BirthDate" name="BirthDate" type="date">
         <span class="focus-input100"></span>
     </div>
 
     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
         <span class="label-input100">Email</span>
-        <input class="input100" type="text" name="email" id="email" placeholder="Email addess...">
+        <input class="input100" type="email" name="Email" id="Email" placeholder="Email addess...">
         <span class="focus-input100"></span>
     </div>
 
     <div class="wrap-input100 validate-input">
         <span class="label-input100">Gender</span>
-        <select id="inputGender" name="gender" class="form-control">
+        <select id="Gender" name="Gender" class="form-control">
             <option selected>Choose...</option>
             <option value=0>Male</option>
             <option value=1>Female</option>
         </select>
         <span class="focus-input100"></span>
     </div>
-
-
-
-
-
     <div class="wrap-input100 validate-input" data-validate="Password is required">
         <span class="label-input100">Password</span>
-        <input class="input100" type="password" name="pass" placeholder="*************" id="password">
+        <input class="input100" type="password" required name="Password" placeholder="*************" id="Password">
         <span class="focus-input100"></span>
     </div>
 
+    @*
+        <div class="wrap-input100 validate-input">
+            <span class="label-input100">Role</span>
+            <select id="inputRole" name="gender" class="form-control">
+                <option selected>Choose...</option>
+                <option value=1>Project Manager</option>
+                <option value=2>System Analyst</option>
+                <option value=3>QA</option>
 
-    <div class="wrap-input100 validate-input">
-        <span class="label-input100">Role</span>
-        <select id="inputRole" name="gender" class="form-control">
-            <option selected>Choose...</option>
-            <option value=1>Project Manager</option>
-            <option value=2>System Analyst</option>
-            <option value=3>QA</option>
-
-        </select>
-        <span class="focus-input100"></span>
-    </div>
-
-
+            </select>
+            <span class="focus-input100"></span>
+        </div>*@
     <div class="wrap-input100 validate-input">
         <span class="label-input100">Choose a profile picture</span>
-        <input class="input100" type="file" id="file" onchange="return fileValidation()">
+        <input class="input100" type="file" name="Avater" id="Avater" onchange="return fileValidation()">
 
     </div>
 
@@ -92,15 +77,13 @@
         <div class="contact100-form-checkbox">
 
         </div>
-
-
     </div>
 
     <div class="container-login100-form-btn">
         <div class="wrap-login100-form-btn">
             <div class="login100-form-bgbtn"></div>
-            <button class="login100-form-btn">
-                Sign In
+            <button type="submit"  class="login100-form-btn register">
+                Register
             </button>
         </div>
 
@@ -114,3 +97,55 @@
 
 </form>
 
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        $('#BirthDate').val(new Date("1998-02-28T00:00:00Z").toISOString().substring(0, 10));
+    })
+    @*$('.register').click(() => {
+        var obj = Object();
+        obj.Id = $("#Id").val();
+        obj.FirstName = $("#FirstName").val();
+        obj.LastName = $("#LastName").val();
+        obj.Gender = $("#Gender").val();
+        obj.Phone = $("#Phone").val();
+        obj.BirthDate = $("#BirthDate").val();
+        obj.Email = $("#Email").val();
+        obj.Password = $("#Password").val();
+        obj.Avater = $("#Avater").val();
+        var form = $("#idFormRegister");
+        console.log(form.serialize())
+        $.ajax({
+            type: "POST",
+            url: 'Accounts/RegisterNew',
+            data: form.serialize(), // serializes the form's elements.
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    });*@
+    $("#idFormRegister").submit(function (e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        var form = $(this);
+        var actionUrl = form.attr('action');
+        $.ajax({
+            type: "POST",
+            url: actionUrl,
+            data: form.serialize(), // serializes the form's elements.
+            success: function (data) {
+                console.log(data);
+                switch (data) {
+                    case 1:
+                        poUPAlertSweet("success", "Register Berhasil", "", "center");
+                        //window.location.href="/Login"
+                        break;
+                    default:
+                        poUPAlertSweet("error", "Register Gagal",JSON.stringify(data), "center");
+                        break;
+                }
+            }
+        });
+
+    });
+</script >
+}

@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using API.Models.FormModel;
 using API.Models.ViewModel;
 using API.ViewModel;
 using Microsoft.AspNetCore.Http;
@@ -44,7 +45,7 @@ namespace WebClient_Project_Management_System.Repositories.Data
 
             return token;
         }
-        public Object Register(RegisterForm entity)
+        public Object Register(FormRegister entity)
         {
             Object entities = new Object();
             StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");

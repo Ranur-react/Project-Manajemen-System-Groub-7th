@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using API.Models.FormModel;
 using API.Models.ViewModel;
 using API.ViewModel;
 using Microsoft.AspNetCore.Http;
@@ -78,13 +79,12 @@ namespace WebClient_Project_Management_System.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Object> RegisterNew(RegisterForm entity)
+        public ActionResult<Object> RegisterNew(FormRegister entity)
         {
             var result = accountRepository.Register(entity);
             try
             {
                 return Json(result);
-
             }
             catch (Exception e)
             {
