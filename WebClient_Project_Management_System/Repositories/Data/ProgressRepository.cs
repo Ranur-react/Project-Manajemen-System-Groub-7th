@@ -31,6 +31,23 @@ namespace WebClient_Project_Management_System.Repositories.Data
             };
 
         }
-        
+
+        public Object AddProgress(FormProgress entity)
+        {
+            Object entities = new Object();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+
+
+            using (var response = httpClient.PostAsync(address.link+ request + "AddProgress", content).Result)
+            {
+                string apiResponse = response.Content.ReadAsStringAsync().Result;
+                entities = JsonConvert.DeserializeObject<Object>(apiResponse);
+            }
+
+            return entities;
+
+
+        }
+
     }
 }

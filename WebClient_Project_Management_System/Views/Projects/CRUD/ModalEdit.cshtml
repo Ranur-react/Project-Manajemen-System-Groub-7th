@@ -2,11 +2,11 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Crete Project</h4>
+                <h4 class="modal-title">Creat Project</h4>
                 <small class="font-bold">new project aour be doing toghtehr</small>
             </div>
             <div class="modal-body ">
-                <form method="post" class="form-horizontal validate-form" id="idformproject" action="/projects/add">
+                <form method="put" class="form-horizontal validate-form" id="idformprojectupdate" action="/projects/edit">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Id Project</label>
 
@@ -42,7 +42,7 @@
                     <div class="form-group">
                         <div class="col-sm-8 col-sm-offset-2">
                             <button class="btn btn-default" type="submit">Cancel</button>
-                            <button class="btn btn-primary" type="submit">Save changes</button>
+                            <button class="btn btn-primary" type="button" onclick="edit()">Save changes</button>
                         </div>
                     </div>
                 </form>

@@ -12,8 +12,9 @@
 
                 <div class="pull-right button-action">
                     <button class="btn btn-success btn-xs">Active</button>
-                    
+
                 </div>
+
 
 
                 <h2 class="m-t-none"></h2>
@@ -22,10 +23,55 @@
                 </small>
                 <div class="small m-t-xs">
                     <strong>Assign Date:</strong><p class="assignDate"></p><br />
-                    <strong>Deadline Date:</strong><p class="endDate"></p><br />
+                    <strong>Deadline Date:</strong><p class="endDate"></p>
+                    <div class="prjectRunButton">
+                    </div>
                 </div>
 
 
+
+
+                @*Ini Timeline*@
+
+                <div class="row timelineBLockPanle hide">
+                    <div class="col-lg-12">
+                        <div class="hpanel">
+                            <div class="panel-heading">
+                                <div class="panel-tools">
+                                    <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                                </div>
+                                Time Line Project
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-md-12">
+                                    <div class="hpanel">
+                                        <div class="v-timeline vertical-container animate-panel contentTimeLineProject" data-child="vertical-timeline-block" data-delay="1">
+                                            @*firstContent*@
+
+                                            @*<--Second Content -->*@
+
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                @*End Timeline*@
+
+
+                @*Ini Datatables*@
+
+                @*End Datatable*@
 
                 <div class="m-t-md">
                     <canvas id="lineOptions" height="60"></canvas>
@@ -35,7 +81,7 @@
     </div>
     <div class="col-md-4 ">
         <div class="font-bold m-b-sm">
-            Project Participants 
+            Project Participants
             <div class="participantButtonGroub"></div>
         </div>
         <div class="row">
@@ -43,48 +89,159 @@
                 <div class="chat-users">
 
                     <div class="users-list assign_list">
-@*                        <div class="hpanel">
+                        <div class="hpanel">
                             <div class="panel-body text-center">
                                 <img alt="logo" class="img-circle img-small" src="~/Template/HomerPro/images/a1.jpg">
                                 <div class="m-t-sm">
                                     <strong>Max Simson</strong>
                                     <p class="small">UI Designer</p>
                                 </div>
-                            </div>
-                        </div>*@
 
-                        <div class="chat-user">
-                            <span class="pull-right label label-success">Online</span>
-                            <img class="chat-avatar" src="~/Template/HomerPro/images/a2.jpg" alt="">
-                            <div class="chat-user-name">
-                                <a href="#">Michael Smith</a>
+
+
                             </div>
                         </div>
-
-
                     </div>
-
                 </div>
-
-
-
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="font-bold m-b-sm">
-            Project Report
-        </div>
-        <div class="hpanel">
-            <div class="panel-body">
-                //Disini Persentase pengerjaan project menggunakan Apex Chart 
-            </div>
         </div>
     </div>
-</div>
 
-<script>
 
-</script>
+
+
+
+
+
+
+
+
+
+
+        <script>
+
+            $(function () {
+
+                $('#datepicker').datepicker();
+                $("#datepicker").on("changeDate", function (event) {
+                    $("#my_hidden_input").val(
+                        $("#datepicker").datepicker('getFormattedDate')
+                    )
+                });
+
+                $('#datapicker2').datepicker();
+                $('.input-group.date').datepicker({});
+                $('.input-daterange').datepicker({});
+
+                $("#demo1").TouchSpin({
+                    min: 0,
+                    max: 100,
+                    step: 0.1,
+                    decimals: 2,
+                    boostat: 5,
+                    maxboostedstep: 10,
+                });
+
+                $("#demo2").TouchSpin({
+                    verticalbuttons: true
+                });
+
+                $("#demo3").TouchSpin({
+                    postfix: '%'
+                });
+
+                $("#demo4").TouchSpin({
+                    postfix: "a button",
+                    postfix_extraclass: "btn btn-default"
+                });
+
+                $(".js-source-states").select2();
+                $(".js-source-states-2").select2();
+
+                //turn to inline mode
+                $.fn.editable.defaults.mode = 'inline';
+
+                //defaults
+                $.fn.editable.defaults.url = '#';
+
+                //editables
+                $('#username').editable({
+                    url: '#',
+                    type: 'text',
+                    pk: 1,
+                    name: 'username',
+                    title: 'Enter username'
+                });
+
+                $('#firstname').editable({
+                    validate: function (value) {
+                        if ($.trim(value) == '') return 'This field is required';
+                    }
+                });
+
+                $('#sex').editable({
+                    prepend: "not selected",
+                    source: [
+                        { value: 1, text: 'Male' },
+                        { value: 2, text: 'Female' }
+                    ],
+                    display: function (value, sourceData) {
+                        var colors = { "": "gray", 1: "green", 2: "blue" },
+                            elem = $.grep(sourceData, function (o) { return o.value == value; });
+
+                        if (elem.length) {
+                            $(this).text(elem[0].text).css("color", colors[value]);
+                        } else {
+                            $(this).empty();
+                        }
+                    }
+                });
+
+                $('#dob').editable();
+
+                $('#event').editable({
+                    placement: 'right',
+                    combodate: {
+                        firstItem: 'name'
+                    }
+                });
+
+                $('#comments').editable({
+                    showbuttons: 'bottom'
+                });
+
+                $('#fruits').editable({
+                    pk: 1,
+                    limit: 3,
+                    source: [
+                        { value: 1, text: 'banana' },
+                        { value: 2, text: 'peach' },
+                        { value: 3, text: 'apple' },
+                        { value: 4, text: 'watermelon' },
+                        { value: 5, text: 'orange' }
+                    ]
+                });
+
+                $('#user .editable').on('hidden', function (e, reason) {
+                    if (reason === 'save' || reason === 'nochange') {
+                        var $next = $(this).closest('tr').next().find('.editable');
+                        if ($('#autoopen').is(':checked')) {
+                            setTimeout(function () {
+                                $next.editable('show');
+                            }, 300);
+                        } else {
+                            $next.focus();
+                        }
+                    }
+                });
+
+                // ClockPicker
+                $('.clockpicker').clockpicker({ autoclose: true });
+
+                // DateTimePicker
+                $('#datetimepicker1').datetimepicker();
+
+            });
+
+        </script>

@@ -20,8 +20,6 @@ namespace API.Models
         public DateTime AssignDate { get; set; }
         public DateTime EndDate { get; set; }
         public String Details{ get; set; }
-
-       
         public virtual ICollection<ProjectHistory> ProjectHistory { get; set; }
 
         [JsonIgnore]

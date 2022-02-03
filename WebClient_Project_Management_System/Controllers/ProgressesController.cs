@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using API.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,22 @@ namespace WebClient_Project_Management_System.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult<Object> Add(FormProgress entity)
+        {
+            var result = ProgressRepository.AddProgress(entity);
+            try
+            {
+                return Json(result);
+
+            }
+            catch (Exception e)
+            {
+
+                return Json(new { Message = e.Message });
+            }
         }
     }
 }
