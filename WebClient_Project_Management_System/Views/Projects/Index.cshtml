@@ -161,7 +161,7 @@
                                     <a href="#" class="itemProject" onClick="itemProjectClick('${id}')">
                                         <div class="panel-body">
                                             <div class="pull-right text-right">
-                                                <small class="stat-label">( ${ id } ) - ${lastDateHistry}</small>
+                                                <small class="stat-label"> ${lastDateHistry}</small>
                                                 <h4>${statusTask} <i class="fa ${IconTask}"></i></h4>
                                             </div>
                                             <h4 class="m-b-xs">${title}</h4>
@@ -284,6 +284,8 @@
                     }
         const openmodaledit = (Id) => {
             $('#EditProjectModal').modal('show');
+            $('#ProjectModal').modal('hide');
+
              var obj = new Object();
         obj.Id = Id;
         console.log(obj);
@@ -387,6 +389,7 @@
         const edit = () => {
 
             var form = $("#idformprojectupdate");
+            console.log($('#Id-Edit').val())
             var actionUrl = "/projects/put";
             $.ajax({
                 type: "PUT",
@@ -398,7 +401,8 @@
                         case 200:
                             poUPAlertSweet("success", "Edit Project Berhasil", "", "center");
                             reload();
-                            //window.location.href="/Login"
+                            $('#EditProjectModal').modal('hide');
+                            itemProjectClick($('#Id-Edit').val())
                             break;
                         default:
                             poUPAlertSweet("error", "Edit Project Gagal", JSON.stringify(data), "center");
