@@ -25,6 +25,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 listProjects">
+                    ....
                 </div>
             </div>
         </div>
@@ -42,6 +43,7 @@
     @Html.Partial("_ModalProjects")
     @Html.Partial("CRUD/ModalAdd")
     @Html.Partial("CRUD/ModalEdit")
+    @Html.Partial("CRUD/ModalAddRequirement")
 }
 
 @section Scripts{
@@ -70,6 +72,76 @@
             });
         }
 
+        const getProjectHistory = (idproject) => {
+            let obj = Object();
+            obj.Id = idproject;
+            $.ajax({
+                url: '/Projects/GetById',
+                type: 'post',
+                data:obj
+            }).done((respond) => {
+                console.log("Project History yang didapatkan");
+                console.log(respond);
+                if (respond.projectHistory.length !== 0) {
+                    tampilkanTimeLineData(respond.projectHistory);
+                    $('.timelineBLockPanle').removeClass('hide');
+                } else {
+                    $('.timelineBLockPanle').addClass('hide');
+
+                }
+
+            }).fail((e) => {
+                console.log(e);
+            });
+        }
+        const tampilkanTimeLineData = (dataHistory) => {
+            var data = "";
+
+            $.each(dataHistory, (k, v) => {
+                data += itemProgress(v.progress.name, v.progress.progresDetails, v.progress.employee.firstName, v.progress.dateEntry, v.progress.colorCode, progressActionsbyStatus(v.progress.progressStatus, v.idProject))
+            })
+            $('.contentTimeLineProject').html(data);
+        }
+
+        const addRequirement = () => {
+            $('#AddRequirementModal').modal('show');
+        }
+
+        const progressActionsbyStatus = (progressStatus,idprj) => {
+  
+            switch (progressStatus) {
+                case 1:
+                    return `<button class="btn btn-success  btn-xs"   onClick="addRequirement('${idprj}')"><i class="fa fa-paperclip"></i>Add Requirement</button>`;
+                    break;
+                case 2:
+                    return 'BusinessDesign Button'
+                    break;
+                case 3:
+                    return 'DesignSystem Button'
+                    break;
+                case 4:
+                    return 'DatabaseDesign Button'
+                    break;
+                case 5:
+                    return 'UxUiDesign Button'
+                    break;
+                case 5:
+                    return 'Developing Button'
+                    break;
+                case 5:
+                    return 'Testing Button'
+                    break;
+                case 5:
+                    return 'Deploying Button'
+                    break;
+                case 5:
+                    return 'Done Button'
+                    break;
+                default:
+                    return 'Initialization Button'
+                    break;
+            }
+        }
         const itemProject = (id,title, texts, lastDateHistry, statusTask, IconTask) => {
 
             return `<div class="hpanel filter-item">
@@ -84,6 +156,32 @@
                                         </div>
                                     </a>
                                 </div>`;
+        }
+
+        const itemProgress = (name, detail,approver, dateentry,color,action) => {
+            return `<div class="vertical-timeline-block">
+                                                <div class="vertical-timeline-icon navy-bg">
+                                                    <i style="color:${color}" class="fa fa-calendar"></i>
+                                                </div>
+                                                <div class="vertical-timeline-content">
+                                                    <div class="p-sm">
+                                                        <span class="vertical-date pull-right"> Actions by ${approver} <br /> <small>${dateentry}</small> </span>
+
+                                                        <h2>${name}</h2>
+                                                        <p>
+                                                           ${detail}
+                                                        </p>
+                                                    </div>
+                                                    <div class="panel-footer">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                   ${action}
+                                                            </div>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>`
         }
 
        const itemProjectClick = (data) => {
@@ -104,6 +202,34 @@
                     $(".ProjectContent").html(content);
                     });*@
         }
+        const requestrequirement = (id) => {
+                        var obj = Object();
+                        obj.IdProject = id;
+                        obj.Name = "Request";
+            obj.ProgresDetails = "Request Requirement";
+                        obj.Approver = "123456";
+                        obj.ColorCode = "#34495E";
+                        console.log("Data requrement yang dikirmakn");
+                        console.log(obj);
+
+                        $.ajax({
+                            url: '/progresses/add',
+                            type: 'POST',
+                            data: obj
+
+                        }).done((respond) => {
+                            reload();
+                            reloadDetail();
+                            poUPAlertSweet("success", "Project started and will be request Requirement", "", "center");
+                            console.log("Respond yang didapatkan");
+
+                            console.log(respond);
+
+
+                        }).fail((e) => {
+                            console.log(e);
+                        });
+                    }
         const openmodaledit = (Id) => {
             $('#EditProjectModal').modal('show');
              var obj = new Object();
@@ -154,31 +280,34 @@
     </script>
 
     <script>
-            const edit = () => {
-             
-                    var form = $("#idformprojectupdate");
-                    var actionUrl = "/projects/put";
-                    $.ajax({
-                        type: "PUT",
-                        url: actionUrl,
-                        data: form.serialize(), // serializes the form's elements.
-                        success: function (data) {
-                            console.log(data);
-                            switch (data) {
-                                case 200:
-                                    poUPAlertSweet("success", "Edit Project Berhasil", "", "center");
-                                    reload();
-                                    reloadDetail();
-                                    //window.location.href="/Login"
-                                    break;
-                                default:
-                                    poUPAlertSweet("error", "Edit Project Gagal", JSON.stringify(data), "center");
-                                    break;
-                            }
-                        }
-                    });
-            }
+        const edit = () => {
+
+            var form = $("#idformprojectupdate");
+            var actionUrl = "/projects/put";
+            $.ajax({
+                type: "PUT",
+                url: actionUrl,
+                data: form.serialize(), // serializes the form's elements.
+                success: function (data) {
+                    console.log(data);
+                    switch (data) {
+                        case 200:
+                            poUPAlertSweet("success", "Edit Project Berhasil", "", "center");
+                            reload();
+                            reloadDetail();
+                            //window.location.href="/Login"
+                            break;
+                        default:
+                            poUPAlertSweet("error", "Edit Project Gagal", JSON.stringify(data), "center");
+                            break;
+                    }
+                }
+            });
+        }
     </script>
+
+
+    
 
 }
 

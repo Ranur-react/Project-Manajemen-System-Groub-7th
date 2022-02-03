@@ -36,17 +36,22 @@
                 data: obj
 
             }).done((respond) => {
-                console.log(respond);
+               // console.log(respond);
                 $('.modal-title').text(respond.name);
                 $('.projectDetails').text(respond.details);
                 $('.assignDate').text(respond.assignDate);
                 $('.endDate').text(respond.endDate);
                 $('.button-action').html(`<button class="btn btn-default btn-xs" onClick="openmodaledit('${respond.id}')"><i class="fa fa-pencil"></i> Edit Project</button>`)
-
+                if (respond.projectHistory.length == 0) {
+                    $('.prjectRunButton').html(`<button class="btn btn-success btn-xs buttonRequest" onClick="requestrequirement('${respond.id}')"><i class="fa fa-memo"></i> Begin Project</button>`)
+                }
+               
+                getProjectHistory('@ViewBag.IdProject');
             }).fail((e) => {
                 console.log(e);
             });
     }
+
 
     $(document).ready(function () {
         reloadDetail();
