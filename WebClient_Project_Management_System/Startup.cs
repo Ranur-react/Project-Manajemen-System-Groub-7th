@@ -86,15 +86,20 @@ namespace WebClient_Project_Management_System
 
                 if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
                 {
-                    response.Redirect("/Home/UnAuthorized?returnUrl=" + request.Path);
+                    response.Redirect("/Login");
+
+                    //response.Redirect("/Home/UnAuthorized?returnUrl=" + request.Path);
                 }
                 else if (response.StatusCode == (int)HttpStatusCode.NotFound)
                 {
-                    response.Redirect("/Home/Notfound");
+                    //response.Redirect("/Home/Notfound");
+                    response.Redirect("/Login");
                 }
                 else if (response.StatusCode == (int)HttpStatusCode.Forbidden)
                 {
-                    response.Redirect("/Home/Forbidden");
+                    //response.Redirect("/Home/Forbidden");
+                    response.Redirect("/Login");
+
                 }
 
             });

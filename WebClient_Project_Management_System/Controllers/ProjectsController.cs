@@ -1,5 +1,6 @@
 ﻿using API.Models;
 using API.Models.FormModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using WebClient_Project_Management_System.Repositories.Data;
 
 namespace WebClient_Project_Management_System.Controllers
 {
+    [Authorize]
     public class ProjectsController : BaseController<Project, ProjectRepository, String>
     {
         private readonly ProjectRepository projectRepository;

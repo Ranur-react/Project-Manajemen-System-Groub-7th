@@ -28,20 +28,49 @@
                 data: obj
 
             }).done((respond) => {
+                console.log("Projects Details");
                 console.log(respond);
                 $('.modal-title').text(respond.name);
                 $('.projectDetails').text(respond.details);
                 $('.assignDate').text(respond.assignDate);
                 $('.endDate').text(respond.endDate);
                 $('.button-action').html(`<button class="btn btn-default btn-xs" onClick="openmodaledit('${respond.id}')"><i class="fa fa-pencil"></i> Edit Project</button>`)
-               
+
+
+
+
+
+
+
+                $('.participantButtonGroub').html(`<button class="btn btn-default btn-xs" onclick="ParticipantdataCall('${respond.id}')" ><i class="fa fa-plus"></i></button>`);
+                if (respond.assignEmployee.length != 0) {
+                    $('.participantGroub').removeClass('hide');
+                    let data = "";
+                    $.each(respond.assignEmployee, (k, v) => {
+                        console.log()
+                        data += EmployeesWasAssign(v.employee.firstName, v.position);
+                    })
+                        $('.assign_list').html(data)
+                } else {
+                    $('.participantGroub').addClass('hide');
+                }
+
             }).fail((e) => {
                 console.log(e);
             });
         
     });
 
-   
+    const EmployeesWasAssign = (name,position) => {
+        return `        <div class="chat-user">
+                            <span class="pull-right label label-success">${position}</span>
+                            <img class="chat-avatar" src="https://raw.githubusercontent.com/ArjunAtlast/Profile-Card/master/assets/john-doe.png" alt="">
+                            <div class="chat-user-name">
+                                <a href="#">${name}</a>
+                            </div>
+                        </div>`
+
+    }
 
 </script>
 

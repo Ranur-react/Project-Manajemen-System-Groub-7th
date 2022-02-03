@@ -27,6 +27,8 @@ namespace API.Models
         public DateTime BirthDate { get; set; }
         public Gender Gender { get; set; }
         public virtual Account Accounts{ get; set; }
+        [JsonIgnore]
+        public virtual ICollection<AssignEmployee> AssignEmployee { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<TestingTask> TestingTask { get; set; }
@@ -37,8 +39,6 @@ namespace API.Models
         [JsonIgnore]
         public virtual ICollection<Progress> Progress { get; set; }
 
-        [JsonIgnore]
-        public virtual ICollection<AssignEmployee> AssignEmployee { get; set; }
 
     }
 

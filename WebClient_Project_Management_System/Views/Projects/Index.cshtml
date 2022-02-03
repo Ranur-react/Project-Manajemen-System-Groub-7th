@@ -30,14 +30,9 @@
         </div>
     </div>
 </div>
-<footer class="footer">
-    <span class="pull-right">
-        Example text
-    </span>
-    Company 2015-2020
-</footer>
 
 <div class="ProjectContent"></div>
+<div class="participantdatacontent"></div>
 @section HideComponents{
     @Html.Partial("_ModalProjects")
     @Html.Partial("CRUD/ModalAdd")
@@ -46,7 +41,10 @@
 
 @section Scripts{
     <script>
+
         $(document).ready(function () {
+            // Initialize Example 2
+            $('#example2').dataTable();
             $.ajax({
                 url: '/Projects/GetAll',
                 type: 'get'
@@ -62,7 +60,6 @@
             }).fail((e) => {
                 console.log(e);
             });
-
         });
 
         const itemProject = (id,title, texts, lastDateHistry, statusTask, IconTask) => {
@@ -80,8 +77,7 @@
                                     </a>
                                 </div>`;
         }
-
-       const itemProjectClick = (data) => {
+      const itemProjectClick = (data) => {
             console.log("Objek data saat di klik")
             console.log(data)
             $.ajax({
@@ -99,6 +95,7 @@
                     $(".ProjectContent").html(content);
                     });*@
         }
+
         const openmodaledit = (Id) => {
             $('#EditProjectModal').modal('show');
              var obj = new Object();
@@ -116,6 +113,52 @@
                 $('#Details-Edit').val(respond.details);
                 $('#AssignDate-Edit').val(new Date(respond.assignDate).toISOString().substring(0, 10));
                 $('#EndDate-Edit').val(new Date(respond.endDate).toISOString().substring(0, 10));
+            }).fail((e) => {
+                console.log(e);
+            });
+        }
+        const ParticipantdataCall = (id) => {
+            console.log("Objek Employee data saat di klik")
+            console.log(id)
+            var ob = Object();
+            ob.Id = id;
+            $.ajax({
+                url: '/Employees/EmployeeListAdd',
+                type: 'post',
+                data: ob
+
+            }).done((respond) => {
+                $(".participantdatacontent").html(respond);
+                $('#ProjectModal').modal('hide');
+                $('#AddParticipantModal').modal('show');
+
+    
+            }).fail((respond) => {
+                console.log(respond)
+            });
+        }
+        const AsigntoProjects = (prjID,id) => {
+            console.log("id project assign");
+            console.log(prjID);
+            console.log(id);
+            var obj = Object();
+            obj.IdProject = prjID;
+            obj.Status_Assign = 6;
+            obj.IdEmployee = id;
+            obj.Position = "Member Teams";
+            console.log("Data Assign yang dikirmakn");
+            console.log(obj);
+            $.ajax({
+                url: '/AssignEmployees/post',
+                type: 'POST',
+                data: obj
+            }).done((respond) => {
+              //  poUPAlertSweet("success", "Employees has Assign , please reload Pages", "", "center");
+                console.log("Respond yang didapatkan");
+                console.log(respond);
+                $('#AddParticipantModal').modal('hide');
+                $('#ProjectModal').modal('hide');
+                itemProjectClick(prjID)
             }).fail((e) => {
                 console.log(e);
             });
@@ -146,5 +189,6 @@
                     }
                 }
             });
+        });
     </script>
 }

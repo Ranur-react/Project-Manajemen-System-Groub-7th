@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal fade hmodal-success" id="AddParticipantModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <small class="font-bold">Assign Employee Participant to project ID @ViewBag.IdProject</small>
+            </div>
+            <div class="modal-body ">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="hpanel">
+                            <div class="panel-heading">
+                                <div class="panel-tools">
+                                    <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="closebox"><i class="fa fa-times"></i></a>
+                                </div>
+                                Employees List
+                            </div>
+                            <div class="panel-body">
+                                <table id="employeesList" class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th width="15%">Actions</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  @*    $(document).ready(function () {
+        var obj = new Object();
+        obj.Id = 'PRJ/MTDL/0003';
+        console.log(obj);
+            $.ajax({
+                url: '/Employees/GetAll',
+                type: 'GET',
+
+            }).done((respond) => {
+                console.log(respond);
+
+            }).fail((e) => {
+                console.log(e);
+            });
+
+    });*@
+
+    $(document).ready(function () {
+        var dataTableEmployee=$('#employeesList').dataTable({
+            'ajax': {
+                'url': "/Employees/GetAll",
+                'dataType': 'json',
+                'dataSrc': null,
+
+            },
+            dom: 'Bfrtip',
+            'columns': [
+                {
+                    'data': null,
+                    'render': (data, type, row, meta) => {
+                        return row['firstName'] + " " + row['lastName']
+                    }
+                },
+               @* {
+                    'data': null,
+                    'render': (data, type, row, meta) => {
+                        console.log("data per row")
+                        console.log(row)
+                        if (row.assignEmployee.length != 0) {
+                            return `Assign`;
+                        } else {
+                            return `No Projects`
+                        }
+                    }
+                },*@
+                {
+                    'data': null,
+                    'render': (data, type, row, meta) => {
+                        var idprj = '@ViewBag.IdProject';
+                        return `<button class="btn btn-info btn-circle " onclick="AsigntoProjects('${idprj}','${row.id}')"><i class="fa fa-plus"></i></button>`
+                    }
+                },
+
+            ]
+        });
+        dataTableEmployee;
+
+    });
+</script>

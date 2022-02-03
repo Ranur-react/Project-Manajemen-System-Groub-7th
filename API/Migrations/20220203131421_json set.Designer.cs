@@ -4,14 +4,16 @@ using API.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220203131421_json set")]
+    partial class jsonset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +74,7 @@ namespace API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("IdEmployee")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdProject")
                         .HasColumnType("nvarchar(450)");
@@ -83,11 +85,14 @@ namespace API.Migrations
                     b.Property<int>("Status_Assign")
                         .HasColumnType("int");
 
+                    b.Property<string>("employeeId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("IdEmployee");
-
                     b.HasIndex("IdProject");
+
+                    b.HasIndex("employeeId");
 
                     b.ToTable("Tb_T_AssignEmployees");
                 });
@@ -306,15 +311,15 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.AssignEmployee", b =>
                 {
-                    b.HasOne("API.Models.Employee", "Employee")
-                        .WithMany("AssignEmployee")
-                        .HasForeignKey("IdEmployee");
-
                     b.HasOne("API.Models.Project", "Project")
                         .WithMany("AssignEmployee")
                         .HasForeignKey("IdProject");
 
-                    b.Navigation("Employee");
+                    b.HasOne("API.Models.Employee", "employee")
+                        .WithMany("AssignEmployee")
+                        .HasForeignKey("employeeId");
+
+                    b.Navigation("employee");
 
                     b.Navigation("Project");
                 });

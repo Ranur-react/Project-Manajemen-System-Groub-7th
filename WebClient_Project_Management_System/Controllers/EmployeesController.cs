@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using API.Models.FormModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,6 +23,12 @@ namespace WebClient_Project_Management_System.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult EmployeeListAdd(KeyForm Key)
+        {
+            ViewBag.IdProject = Key.Id;
             return View();
         }
     }

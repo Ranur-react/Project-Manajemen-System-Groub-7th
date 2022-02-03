@@ -19,10 +19,8 @@ namespace API.Models
         [ForeignKey("Employee")]
         public String IdEmployee { get; set; }
         public String Position { get; set; }
-
+        public virtual Employee Employee { get; set; }
         [JsonIgnore]
-        public virtual Employee employee { get; set; }
-
         public virtual Project Project { get; set; }
 
         
