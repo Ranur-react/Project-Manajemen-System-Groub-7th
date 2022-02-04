@@ -42,15 +42,19 @@
                 $('.projectDetails').text(respond.details);
                 $('.assignDate').text(respond.assignDate);
                 $('.endDate').text(respond.endDate);
-                $('.button-action').html(`<button class="btn btn-default btn-xs" onClick="openmodaledit('${respond.id}')"><i class="fa fa-pencil"></i> Edit Project</button>`)
 
 
 
 
 
+                if ('@User.IsInRole("IT Manager")' =='True')
+                {
+                    $('.button-action').html(`<button class="btn btn-default btn-xs" onClick="openmodaledit('${respond.id}')"><i class="fa fa-pencil"></i> Edit Project</button>`)
 
+                    $('.participantButtonGroub').html(`<button class="btn btn-default btn-xs" onclick="ParticipantdataCall('${respond.id}')" ><i class="fa fa-plus"></i></button>`);
 
-                $('.participantButtonGroub').html(`<button class="btn btn-default btn-xs" onclick="ParticipantdataCall('${respond.id}')" ><i class="fa fa-plus"></i></button>`);
+                }
+
                 if (respond.assignEmployee.length != 0) {
                     $('.participantGroub').removeClass('hide');
                     let data = "";
@@ -63,7 +67,14 @@
                     $('.participantGroub').addClass('hide');
                 }
                 if (respond.projectHistory.length == 0) {
+                    console.log('Level Akses')
+                    console.log('@User.IsInRole("IT Manager")')
+                    if ('@User.IsInRole("IT Manager")' =='True')
+                        {
                     $('.prjectRunButton').html(`<button class="btn btn-success btn-xs buttonRequest" onClick="requestrequirement('${respond.id}')"><i class="fa fa-memo"></i> Begin Project</button>`)
+
+                    }
+
                 }
 
                 getProjectHistory('@ViewBag.IdProject');

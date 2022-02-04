@@ -11,7 +11,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand" data-toggle="modal" data-target="#AddProjectModal"><i class="fa fa-plus"></i> PROJECT</a>
+            @if (User.IsInRole("IT Manager"))
+            {
+                <a href="#" class="navbar-brand" data-toggle="modal" data-target="#AddProjectModal"><i class="fa fa-plus"></i> PROJECT</a>
+
+            }
+            else
+            {
+                <div href="#" class="navbar-brand" >PROJECT</div>
+            }
             <div class="brand-desc">
                 Management System
             </div>

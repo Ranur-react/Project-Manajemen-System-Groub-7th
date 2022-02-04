@@ -9,7 +9,7 @@
 <div class="content">
     <div class="row">
         <div class="col-md-12">
-            <div class="row">
+@*            <div class="row">
                 <div class="col-lg-12">
                     <div class="hpanel">
                         <div class="panel-body">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="row">
                 <div class="col-lg-12 listProjects">
                     ....
@@ -115,40 +115,74 @@
 
             switch (progressStatus) {
                 case 1:
+                         if ('@User.IsInRole("Business Analyses")' =='True')
+                {
+
                     return `<button class="btn btn-success  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Requirement')"><i class="fa fa-paperclip"></i>Add Requirement</button>`;
+
+                    }
+                    return '';
                     break;
                 case 2:
-                    return `<button class="btn btn-info  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Business Design')"><i class="fa fa-paperclip"></i>Add Business Design</button>`;
+                           if ('@User.IsInRole("Business Analyses")' =='True')
+                            {
+                               return `<button class="btn btn-info  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Business Design')"><i class="fa fa-paperclip"></i>Add Business Design</button>`;
+                    }
+                    return '';
+
                     break;
                 case 3:
-                    return `<button class="btn btn-info  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Design System')"><i class="fa fa-paperclip"></i>Add Design Systemn</button>`;
+                       if ('@User.IsInRole("System Analyses")' =='True')
+                       {
+                           return `<button class="btn btn-info  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Design System')"><i class="fa fa-paperclip"></i>Add Design Systemn</button>`;
+
+                        }
+                    return '';
+
                     break;
                 case 4:
-                    return `<button class="btn btn-info  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Database Design')"><i class="fa fa-paperclip"></i>Add Database Design</button>`;
+                    if ('@User.IsInRole("System Analyses")' == 'True') {
+                        return `<button class="btn btn-info  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Database Design')"><i class="fa fa-paperclip"></i>Add Database Design</button>`;
+                    }
+                    return '';
+
                     break;
                 case 5:
-                    return `<button class="btn btn-info  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Ux/Ui Design')"><i class="fa fa-paperclip"></i>Add Ux/Ui Design</button>`;
+                    if ('@User.IsInRole("System Analyses")' == 'True') {
 
+                        return `<button class="btn btn-info  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Ux/Ui Design')"><i class="fa fa-paperclip"></i>Add Ux/Ui Design</button>`;
+                    }
+                    return '';
                     //return 'UxUiDesign Button'
                     break;
                 case 6:
-                    return `<button class="btn btn-danger  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Developing')"><i class="fa fa-paperclip"></i>Add Developing</button>`;
+                    if ('@User.IsInRole("Developer")' == 'True') {
 
+                        return `<button class="btn btn-danger  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Developing')"><i class="fa fa-paperclip"></i>Add Developing</button>`;
+                    }
+                    return '';
                     //return 'Developing Button'
                     break;
                 case 7:
-                    return `<button class="btn btn-warning  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Testing Progress')"><i class="fa fa-paperclip"></i>Add Testing Progress</button>`;
+                    if ('@User.IsInRole("Quallity Assurance")' == 'True') {
 
+                        return `<button class="btn btn-warning  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Testing Progress')"><i class="fa fa-paperclip"></i>Add Testing Progress</button>`;
+                    }
+                    return '';
                     //return 'Testing Button'
                     break;
                 case 8:
-                    return `<button class="btn btn-warning2  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Deploying Progress')"><i class="fa fa-paperclip"></i>Add Deploying Progress</button>`;
-
+                    if ('@User.IsInRole("DevOps")' == 'True') {
+                        return `<button class="btn btn-warning2  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Deploying Progress')"><i class="fa fa-paperclip"></i>Add Deploying Progress</button>`;
+                    }
+                    return '';
                    // return 'Deploying Button'
                     break;
                 case 9:
-                    return `<button class="btn btn-default  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Done')"><i class="fa fa-paperclip"></i>Add Deploying</button>`;
-                    return 'Done Button'
+                    if ('@User.IsInRole("IT Manager")' == 'True') {
+                        return `<button class="btn btn-default  btn-xs"   onClick="addProgress('${idprj}',${progressStatus},'Done')"><i class="fa fa-paperclip"></i>Project Clear</button>`;
+                    }
+                        return ''
                     break;
                 default:
                     return 'Finally'
