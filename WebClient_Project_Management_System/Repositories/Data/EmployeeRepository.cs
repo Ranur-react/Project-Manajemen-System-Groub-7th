@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using API.Models.FormModel;
 using API.Models.ViewModel;
 using API.ViewModel;
 using Microsoft.AspNetCore.Http;
@@ -32,5 +33,19 @@ namespace WebClient_Project_Management_System.Repositories.Data
 
         }
         
+            public Employee Find(KeyForm entity)
+        {
+            Employee entitesss = new Employee();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+
+            using (var response = httpClient.PostAsync(address.link + request + "Find", content).Result)
+            {
+                string apiResponse = response.Content.ReadAsStringAsync().Result;
+                entitesss = JsonConvert.DeserializeObject<Employee>(apiResponse);
+            }
+
+            return entitesss;
+        }
+
     }
 }

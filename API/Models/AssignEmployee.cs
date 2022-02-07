@@ -20,7 +20,6 @@ namespace API.Models
         public String IdEmployee { get; set; }
         public String Position { get; set; }
         public virtual Employee Employee { get; set; }
-        [JsonIgnore]
         public virtual Project Project { get; set; }
 
         

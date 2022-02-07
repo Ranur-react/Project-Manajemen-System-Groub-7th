@@ -31,5 +31,21 @@ namespace WebClient_Project_Management_System.Controllers
             ViewBag.IdProject = Key.Id;
             return View();
         }
+        [HttpPost]
+        public ActionResult<Object> Find(KeyForm entity)
+        {
+            var result = EmployeeRepository.Find(entity);
+            try
+            {
+
+                return Json(result);
+
+            }
+            catch (Exception e)
+            {
+
+                return Json(new { Message = e.Message });
+            }
+        }
     }
 }

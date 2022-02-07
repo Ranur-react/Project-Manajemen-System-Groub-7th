@@ -67,6 +67,7 @@ namespace WebClient_Project_Management_System.Controllers
                 if (result.idToken != null)
                 {
                     HttpContext.Session.SetString("JWToken", result.idToken);
+                    HttpContext.Session.SetString("Username", entity.Username);
                 }
                 return Json(result);
 

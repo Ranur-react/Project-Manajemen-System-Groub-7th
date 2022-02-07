@@ -6,23 +6,24 @@
 @section Menubar{
     @Html.Partial("_MenuBar")
 }
+
 <div class="content">
     <div class="row">
         <div class="col-md-12">
-@*            <div class="row">
-                <div class="col-lg-12">
-                    <div class="hpanel">
-                        <div class="panel-body">
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search projects..">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default"><i class="fa fa-search"></i></button>
+            @*            <div class="row">
+                    <div class="col-lg-12">
+                        <div class="hpanel">
+                            <div class="panel-body">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="Search projects..">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
             <div class="row">
                 <div class="col-lg-12 listProjects">
                     ....
@@ -40,26 +41,114 @@
     @Html.Partial("CRUD/ModalEdit")
     @Html.Partial("CRUD/ModalAddRequirement")
 }
-
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
 @section Scripts{
     <script>
-
+        var datakaryawan = Object();
         $(document).ready(function () {
             reload();
 
         });
-
-
         const reload = () => {
+                findEmployeeByParam('@HttpContextAccessor.HttpContext.Session.GetString("Username")');
+
+            if('@User.IsInRole("IT Manager")' == 'True') {
+                reloadAll();
+            } else {
+@*                console.log(" Assign Projects")
+                console.log('@HttpContextAccessor.HttpContext.Session.GetString("Username")');*@
+                findEmployeePrjectsByParam('@HttpContextAccessor.HttpContext.Session.GetString("Username")');
+                //reloadAll();
+
+            }
+
+        }
+        const reloadOwnProjects = () => {
+
+        }
+
+        const findEmployeePrjectsByParam = (param) => {
+            var obj = Object();
+            obj.Id = param;
+            $.ajax({
+                url: '/Employees/Find',
+                type: 'POST',
+                data: obj
+            }).done((respond) => {
+                console.log("Data karyawan yang Login")
+                console.log(respond)
+                if (respond.assignEmployee.length != 0) {
+                    console.log("Data Projects by Id . . . .");
+                    console.log(respond);
+                    var data = "";
+
+                    $.each(respond.assignEmployee, (k, v) => {
+                        if (v.project.projectHistory.length != 0) {
+                            let prj = v.project;
+                            const max = prj.projectHistory.reduce(function (prev, current) {
+                                return (prev.progress.progressStatus > current.progress.progressStatus) ? prev : current
+                            })
+                            @* console.log("cari data progress tertinggi")
+                            console.log(max);*@
+                            data += itemProject(prj.id, prj.name, prj.details, prj.assignDate, max.progress.name, "fa-level-up text-success");
+
+                        } else {
+                            data += itemProject(prj.id, prj.name, prj.details, prj.assignDate, '~', "fa-gear text-default");
+
+
+                            
+
+                        }
+
+                    })
+                    $('.listProjects').html(data);
+                }
+            }).fail((respond) => {
+                console.log(respond)
+            });
+        }
+
+        const findEmployeeByParam = (param) => {
+            var obj = Object();
+            obj.Id = param;
+            $.ajax({
+                url: '/Employees/Find',
+                type: 'POST',
+                data:obj
+            }).done((respond) => {
+                console.log("Data karyawan yang Login")
+                datakaryawan.Id = respond.id;
+                console.log(datakaryawan)
+            }).fail((respond) => {
+                console.log(respond)
+            });
+        }
+        const reloadAll = () => {
             $.ajax({
                 url: '/Projects/GetAll',
                 type: 'get'
 
             }).done((respond) => {
+                console.log("Data Projects . . . .");
                 console.log(respond);
                 var data = "";
+              @*  var filtered = Object.filter(respond, row => row > 1);
+                console.log("data projects setelah di filter");
+                console.log(filtered);*@
                 $.each(respond, (k, v) => {
-                    data += itemProject(v.id, v.name, v.details, v.assignDate, "Requirement", "fa-level-up text-success");
+                    if (v.projectHistory.length != 0) {
+                        const max = v.projectHistory.reduce(function (prev, current) {
+                            return (prev.progress.progressStatus > current.progress.progressStatus) ? prev : current
+                        })
+@*                        console.log("cari data progress tertinggi")
+                        console.log(max);*@
+                        data += itemProject(v.id, v.name, v.details, v.assignDate, max.progress.name, "fa-level-up text-success");
+
+                    } else {
+                        data += itemProject(v.id, v.name, v.details, v.assignDate, '~', "fa-gear text-default");
+
+                    }
 
                 })
                 $('.listProjects').html(data);
@@ -92,8 +181,8 @@
         }
         const tampilkanTimeLineData = (dataHistory) => {
             var data = "";
-
             $.each(dataHistory, (k, v) => {
+
                 data += itemProgress(v.progress.name, v.progress.progresDetails, v.progress.employee.firstName, v.progress.dateEntry, v.progress.colorCode, progressActionsbyStatus(v.progress.progressStatus, v.idProject))
             })
             $('.contentTimeLineProject').html(data);
@@ -101,10 +190,13 @@
 
         const addProgress = (idprj,status,name) => {
             var obj = new Object();
+            console.log("Data karyawan yang Login")
+            console.log(datakaryawan.Id);
+             
             obj.id = idprj;
             obj.Name = name;
             obj.ProgresDetails = name+" Was Entry";
-            obj.Approver = "11445";
+            obj.Approver = datakaryawan.Id;
             obj.ProgressStatus = status;
             obj.ColorCode = "#34495E";
             obj.Success = name+" Entried";
@@ -254,7 +346,7 @@
             obj.id = id;
             obj.Name = "Request";
             obj.ProgresDetails = "Request Requirement";
-            obj.Approver = "11445";
+            obj.Approver = datakaryawan.Id;
             obj.ColorCode = "#34495E";
             obj.ProgressStatus = 0;
             obj.Success = "Project started and will be request Requirement";
